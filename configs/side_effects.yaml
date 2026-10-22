@@ -1,0 +1,32 @@
+# Which MASSIVE intents have a SIDE EFFECT: executing them would create, modify or delete
+# the user's data, send or post something to another person, spend money / book something,
+# or change the state of a physical device. These are the requests an assistant must
+# confirm before acting.
+#
+# Label provenance: rule-derived from MASSIVE's human intent annotation via this file.
+# Ephemeral playback controls (play_*, audio_volume_*, music_settings) are deliberately
+# NOT side effects: they are trivially reversible and confirming them would be hostile UX.
+side_effect_intents:
+  alarm_set: creates an alarm
+  alarm_remove: deletes an alarm
+  calendar_set: creates or edits a calendar event
+  calendar_remove: deletes a calendar event
+  email_sendemail: sends a message to another person
+  email_addcontact: writes to the address book
+  iot_cleaning: starts a physical device (vacuum)
+  iot_coffee: starts a physical device (coffee machine)
+  iot_hue_lightchange: changes physical device state
+  iot_hue_lightdim: changes physical device state
+  iot_hue_lightoff: changes physical device state
+  iot_hue_lighton: changes physical device state
+  iot_hue_lightup: changes physical device state
+  iot_wemo_off: switches a smart plug
+  iot_wemo_on: switches a smart plug
+  lists_createoradd: writes to a list
+  lists_remove: deletes from a list
+  music_likeness: persists a preference
+  music_dislikeness: persists a preference
+  social_post: publishes to other people
+  takeaway_order: spends money (held-out domain - tests generalisation)
+  transport_taxi: books and spends money
+  transport_ticket: books and spends money

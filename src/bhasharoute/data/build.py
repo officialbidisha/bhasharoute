@@ -1,0 +1,155 @@
+"""Build the labelled dataset: data/processed/dataset.jsonl + reports/datasheet.md.
+
+    uv run python -m bhasharoute.data.build
+
+Pipeline: load MASSIVE en/hi/bn -> derive labels -> add synthetic romanised and
+code-switched variants (inheriting the source id's split) -> NFC/normalised
+de-duplication with leakage removal -> validation -> write.
+"""
+from __future__ import annotations
+
+import json
+from collections import Counter
+
+from bhasharoute.config import HOLDOUT_SCENARIOS, LOCALES, PROCESSED_DIR, RAW_DIR, REPORTS_DIR
+from bhasharoute.data.codemix import codeswitch
+from bhasharoute.data.massive import human_judged_codemix, load_locale, strip_annotation
+from bhasharoute.data.translit import romanize
+from bhasharoute.labels import is_side_effect
+from bhasharoute.text import detect_script, normalize
+
+SOURCE = "MASSIVE-1.1 (Amazon, CC BY 4.0)"
+VARIANT_PROVENANCE = {
+    "native": "human:professional_translation",
+    "romanized": "synthetic:rule_transliteration",
+    "codemix": "synthetic:slot_aligned_codeswitch",
+    "codemix_romanized": "synthetic:slot_aligned_codeswitch+rule_transliteration",
+}
+SPLIT_ORDER = {"train": 0, "dev": 1, "test": 2}
+REQUIRED = ("uid", "group_id", "text", "lang", "script", "variant", "text_provenance", "scenario",
+            "intent", "side_effect", "label_provenance", "split", "in_domain", "human_codemix")
+
+
+def _record(row: dict, lang: str, variant: str, text: str, human_codemix: bool = False) -> dict:
+    return {
+        "uid": f"massive-{row['id']}:{lang}:{variant}",
+        "group_id": f"massive-{row['id']}",
+        "text": text,
+        "lang": lang,
+        "script": detect_script(text),
+        "variant": variant,
+        "text_provenance": VARIANT_PROVENANCE[variant],
+        "scenario": row["scenario"],
+        "intent": row["intent"],
+        "side_effect": is_side_effect(row["intent"]),
+        "label_provenance": {"scenario": "human:MASSIVE_annotation",
+                             "side_effect": "rule:configs/side_effects.yaml(human intent)"},
+        "split": row["partition"],
+        "in_domain": row["scenario"] not in HOLDOUT_SCENARIOS,
+        "human_codemix": human_codemix,
+        "source": SOURCE,
+    }
+
+
+def generate() -> list[dict]:
+    rows = {lang: {r["id"]: r for r in load_locale(RAW_DIR, loc)} for lang, loc in LOCALES.items()}
+    records = []
+    for rid, en in rows["en"].items():
+        records.append(_record(en, "en", "native", en["utt"]))
+        for lang in ("hi", "bn"):
+            r = rows[lang][rid]
+            assert r["partition"] == en["partition"] and r["intent"] == en["intent"], rid
+            records.append(_record(r, lang, "native", r["utt"], human_judged_codemix(r)))
+            records.append(_record(r, lang, "romanized", romanize(r["utt"], lang)))
+            mixed = codeswitch(r["annot_utt"], en["annot_utt"])
+            if mixed is not None:
+                records.append(_record(r, lang, "codemix", mixed))
+                records.append(_record(r, lang, "codemix_romanized", romanize(mixed, lang)))
+    return records
+
+
+def deduplicate(records: list[dict]) -> tuple[list[dict], Counter]:
+    """Exact de-duplication on the normalised text, across languages and variants.
+
+    Rows are visited train -> dev -> test, so if a normalised string already exists in an
+    earlier split, the later copy is dropped: an evaluation row can never be a verbatim
+    copy of a training row (different MASSIVE ids sometimes share short utterances such
+    as "stop"). Groups stay split-pure by construction because splits are per id.
+    """
+    stats: Counter = Counter()
+    seen: dict[str, tuple[str, str]] = {}
+    kept = []
+    for rec in sorted(records, key=lambda r: SPLIT_ORDER[r["split"]]):
+        key = normalize(rec["text"])
+        if not key:
+            stats["dropped_empty"] += 1
+            continue
+        if key in seen:
+            prev_split, prev_scenario = seen[key]
+            stats["dropped_dup_same_split" if prev_split == rec["split"] else
+                  f"dropped_leak_{prev_split}_to_{rec['split']}"] += 1
+            if prev_scenario != rec["scenario"]:
+                stats["label_conflicts_seen"] += 1
+            continue
+        seen[key] = (rec["split"], rec["scenario"])
+        kept.append(rec)
+    return kept, stats
+
+
+def validate(records: list[dict]) -> None:
+    group_split: dict[str, str] = {}
+    for rec in records:
+        missing = [k for k in REQUIRED if k not in rec]
+        assert not missing, (rec.get("uid"), missing)
+        assert rec["split"] in SPLIT_ORDER and rec["lang"] in LOCALES
+        assert group_split.setdefault(rec["group_id"], rec["split"]) == rec["split"], rec["group_id"]
+    assert len({r["uid"] for r in records}) == len(records), "uid collision"
+
+
+def _datasheet(records: list[dict], dedup: Counter) -> str:
+    tab = Counter((r["split"], r["lang"], r["variant"]) for r in records)
+    lines = ["# Datasheet (auto-generated by `bhasharoute.data.build`)", "",
+             f"Source: {SOURCE}. Locales: en-US, hi-IN, bn-BD.", "",
+             "## Rows by split / language / variant", "",
+             "| split | lang | native (human) | romanized (synthetic) | codemix (synthetic) | codemix_romanized (synthetic) |",
+             "|---|---|---|---|---|---|"]
+    for split in SPLIT_ORDER:
+        for lang in LOCALES:
+            lines.append(f"| {split} | {lang} | " + " | ".join(
+                str(tab[(split, lang, v)]) for v in VARIANT_PROVENANCE) + " |")
+    ood = Counter(r["split"] for r in records if not r["in_domain"])
+    hcm = Counter((r["split"], r["lang"]) for r in records if r["human_codemix"])
+    se = Counter(r["split"] for r in records if r["side_effect"] and r["in_domain"])
+    ind = Counter(r["split"] for r in records if r["in_domain"])
+    lines += ["", "## Slices", "",
+              f"- Held-out (OOD) domains {list(HOLDOUT_SCENARIOS)}: rows per split {dict(ood)}. "
+              "Train/dev rows of these domains are never used for fitting or tuning; test rows are the OOD set.",
+              f"- Human-judged code-mixed native rows (majority of MASSIVE judges said target+English): {dict(hcm)}",
+              "- Side-effect rate among in-domain rows: " + ", ".join(
+                  f"{s} {se[s] / ind[s]:.1%}" for s in SPLIT_ORDER),
+              "", "## De-duplication / leakage control", ""]
+    lines += [f"- {k}: {v}" for k, v in sorted(dedup.items())]
+    lines += ["", "## Label provenance", "",
+              "- `scenario`, `intent`: human annotation from MASSIVE (validated by 3 judges per utterance).",
+              "- `side_effect`: deterministic mapping from the human intent via `configs/side_effects.yaml`.",
+              "- `native` text: professional human translation. `romanized`, `codemix`, `codemix_romanized`: "
+              "synthetic, rule-generated, labels inherited from the source id (no model in the loop).",
+              "- Headline metrics are reported on human-translated `native` test rows; synthetic slices are "
+              "robustness probes only and are never the sole evaluation set."]
+    return "\n".join(lines) + "\n"
+
+
+def main() -> None:
+    records, dedup = deduplicate(generate())
+    validate(records)
+    PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+    with open(PROCESSED_DIR / "dataset.jsonl", "w", encoding="utf-8") as f:
+        for rec in records:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    REPORTS_DIR.mkdir(exist_ok=True)
+    (REPORTS_DIR / "datasheet.md").write_text(_datasheet(records, dedup), encoding="utf-8")
+    print(f"wrote {len(records)} rows; dedup {dict(dedup)}")
+
+
+if __name__ == "__main__":
+    main()
