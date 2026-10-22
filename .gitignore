@@ -7,3 +7,4 @@ data/processed/
 artifacts/
 *.egg-info/
 .DS_Store
+*.log

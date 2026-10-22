@@ -1,0 +1,31 @@
+# Hand-written lexicon for the rule-based baseline (approach A).
+# Matching: normalised text; Latin phrases need word boundaries, Indic phrases match as
+# substrings so inflected forms (जगा -> जगाओ, জাগা -> জাগাও) are caught. A request routes
+# to the scenario with the highest total matched-phrase length; no match = no answer.
+scenarios:
+  alarm: [alarm, wake me, wake up, snooze, अलार्म, जगा, जगाना, উঠিয়ে, অ্যালার্ম, এলার্ম, জাগা, জাগিয়ে, ঘুম থেকে, jaga, jagao, jagiye, uthiye]
+  audio: [volume, mute, unmute, louder, quieter, too loud, sound, आवाज, आवाज़, वॉल्यूम, म्यूट, चुप, ভলিউম, আওয়াজ, শব্দ, মিউট, চুপ, awaz, awaaz, chup]
+  calendar: [meeting, calendar, appointment, schedule, event, remind me, reminder, मीटिंग, कैलेंडर, बैठक, अपॉइंटमेंट, याद दिला, रिमाइंडर, कार्यक्रम, মিটিং, ক্যালেন্ডার, সভা, অ্যাপয়েন্টমেন্ট, মনে করিয়ে, রিমাইন্ডার, অনুষ্ঠান, yad dila, mane kariye]
+  datetime: [what time, time is it, time in, date today, what day, what date, time zone, timezone, समय, कितने बजे, तारीख, टाइम, कौन सा दिन, সময়, কটা বাজে, তারিখ, কী বার, কি বার, samay, kitne baje, tarikh]
+  email: [email, e-mail, mail, inbox, contact, ईमेल, मेल, इनबॉक्स, संपर्क, ইমেল, ইমেইল, মেইল, ইনবক্স, যোগাযোগ, imel, mel]
+  general: [joke, hello, hi there, how are you, who are you, thank you, चुटकुला, मज़ाक, मजाक, नमस्ते, कैसे हो, धन्यवाद, কৌতুক, জোক, নমস্কার, কেমন আছ, ধন্যবাদ, chutkula, namaste, kaise ho, kemon acho]
+  iot: [light, lights, lamp, plug, socket, vacuum, coffee, bulb, brightness, लाइट, बत्ती, रोशनी, प्लग, कॉफी, कॉफ़ी, वैक्यूम, बल्ब, আলো, লাইট, বাতি, প্লাগ, কফি, ভ্যাকুয়াম, বাল্ব, lait, batti, roshani, alo, kofi]
+  lists: [list, shopping list, to do, todo, grocery, groceries, सूची, लिस्ट, खरीदारी, তালিকা, লিস্ট, কেনাকাটা, suchi, talika]
+  music: [this song, like this, playlist, shuffle, repeat, who sings, singer, artist, genre, गाना कौन, गायक, पसंद, शफल, প্লেলিস্ট, গায়ক, পছন্দ, gayak, pasand]
+  news: [news, headlines, headline, समाचार, खबर, ख़बर, न्यूज़, न्यूज, সংবাদ, খবর, নিউজ, samachar, khabar]
+  play: [play, podcast, radio, audiobook, game, song, music, चलाओ, चलाएं, बजाओ, गाना, संगीत, पॉडकास्ट, रेडियो, गेम, ऑडियोबुक, চালাও, চালান, বাজাও, গান, সংগীত, পডকাস্ট, রেডিও, গেম, chalao, bajao, gana, gaan]
+  qa: [what is, who is, who was, how many, how much is, define, definition, meaning, exchange rate, stock, share price, calculate, plus, क्या है, कौन है, कौन था, मतलब, अर्थ, शेयर, विनिमय, परिभाषा, কী, কে ছিল, মানে, অর্থ, শেয়ার, সংজ্ঞা, kya hai, kaun hai, matlab]
+  recommendation: [recommend, suggest, suggestion, good restaurant, events near, movies to watch, nearby, सुझाव, सुझा, सिफारिश, आसपास, অনুষ্ঠান কাছাকাছি, সুপারিশ, পরামর্শ, কাছাকাছি, sujhav]
+  social: [tweet, facebook, twitter, post, complaint, social media, status, ट्वीट, फेसबुक, ट्विटर, पोस्ट, शिकायत, টুইট, ফেসবুক, টুইটার, পোস্ট, অভিযোগ]
+  transport: [train, taxi, uber, cab, ticket, traffic, bus, flight, directions, commute, ट्रेन, टैक्सी, कैब, टिकट, ट्रैफिक, ट्रैफ़िक, बस, उबर, रेल, ট্রেন, ট্যাক্সি, ক্যাব, টিকিট, ট্রাফিক, বাস, উবার, রেল, tren, taxi, tikat]
+  weather: [weather, rain, raining, temperature, sunny, forecast, snow, umbrella, humid, मौसम, बारिश, तापमान, धूप, ठंड, गर्मी, छाता, আবহাওয়া, বৃষ্টি, তাপমাত্রা, রোদ, ঠান্ডা, গরম, ছাতা, mausam, barish, tapman, brishti, briShti]
+
+# Action phrases that indicate a side effect (create / modify / delete / send / book /
+# buy / device control). Used both by approach A and as the always-on lexical guard.
+side_effect_triggers: [
+  set, create, add, remove, delete, cancel, send, post, tweet, book, order, buy, purchase,
+  turn on, turn off, switch on, switch off, dim, brighten, start the, schedule, remind me, wake me, reply,
+  लगा, लगाओ, सेट, बना, जोड़, जोड, हटा, मिटा, रद्द, भेज, पोस्ट, बुक, ऑर्डर, खरीद, चालू, बंद, जला, बुझा, शुरू, जगा,
+  সেট, তৈরি, যোগ, সরা, মুছ, বাতিল, পাঠা, পোস্ট, বুক, অর্ডার, কিনে, চালু, বন্ধ, জ্বাল, নিভ, জাগা, শুরু,
+  laga, lagao, bhej, bhejo, hata, hatao, chalu, band, jalao, bujhao, patha, pathao, bandh, muchhe, jagao
+]
