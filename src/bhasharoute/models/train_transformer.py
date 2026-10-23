@@ -86,6 +86,10 @@ def dev_metrics(scen_logits: np.ndarray, side_logits: np.ndarray, ds: RequestDat
             "dev_side_auroc": float(roc_auc_score(s, side_logits))}
 
 
+def _mem(device) -> str:
+    return f" mps_mem {torch.mps.driver_allocated_memory() / 1e9:.2f}GB" if device.type == "mps" else ""
+
+
 def _param_groups(model: RouterNet, lr: float, head_lr: float, wd: float) -> list[dict]:
     groups = {k: [] for k in ("enc_decay", "enc_nodecay", "head_decay", "head_nodecay")}
     for name, p in model.named_parameters():
@@ -120,7 +124,9 @@ def train_finetune(args, model, tok, tr, dv, device, out_dir, cfg) -> dict:
     ce = nn.CrossEntropyLoss(weight=class_weights(tr_ds.scenarios, len(SCENARIO_TO_ID)).to(device))
     bce = nn.BCEWithLogitsLoss(pos_weight=side_pos_weight(tr_ds.side).to(device))
     opt = torch.optim.AdamW(_param_groups(model, args.lr, args.head_lr, 0.01))
-    total = args.epochs * len(tr_loader)
+    # Gradient accumulation: micro-batches of `bs` rows, one optimizer step every `accum`
+    # micro-batches -> effective batch bs*accum with only one micro-batch of activations live.
+    total = args.epochs * (len(tr_loader) // args.accum)
     sched = warmup_linear(opt, int(0.06 * total), total)
     trainable = [p for p in model.parameters() if p.requires_grad]
 
@@ -128,21 +134,26 @@ def train_finetune(args, model, tok, tr, dv, device, out_dir, cfg) -> dict:
     for epoch in range(1, args.epochs + 1):
         model.train()
         t0, run_loss = time.time(), 0.0
-        for b in tr_loader:
+        for i, b in enumerate(tr_loader, start=1):
             scen_logits, side_logits = model(b["input_ids"].to(device), b["attention_mask"].to(device))
             loss = ce(scen_logits, b["scenario"].to(device)) + args.side_weight * bce(side_logits, b["side"].to(device))
-            loss.backward()                                   # gradients for every trainable weight
+            (loss / args.accum).backward()                    # gradients accumulate across micro-batches
+            run_loss += loss.item()
+            if i % args.accum:
+                continue
             gnorm = torch.nn.utils.clip_grad_norm_(trainable, 1.0)
             opt.step()                                        # AdamW update
             sched.step()                                      # warm-up / decay schedule
             opt.zero_grad(set_to_none=True)
             step += 1
-            run_loss += loss.item()
             if step % 100 == 0:
-                print(f"epoch {epoch} step {step}/{total} loss {run_loss / 100:.4f} "
+                print(f"epoch {epoch} step {step}/{total} loss {run_loss / (100 * args.accum):.4f} "
                       f"grad_norm {gnorm:.2f} lr {sched.get_last_lr()[0]:.2e} "
-                      f"{100 * args.bs / (time.time() - t0):.0f} ex/s", flush=True)
+                      f"{100 * args.bs * args.accum / (time.time() - t0):.0f} ex/s{_mem(device)}", flush=True)
                 run_loss, t0 = 0.0, time.time()
+        opt.zero_grad(set_to_none=True)  # drop a trailing partial accumulation
+        if device.type == "mps":
+            torch.mps.empty_cache()
         m = dev_metrics(*predict_logits(model, dv_loader, device), dv_ds)
         m["epoch"] = epoch
         history.append(m)
@@ -213,8 +224,9 @@ def main() -> None:
     ap.add_argument("--mode", choices=["frozen", "finetune"], required=True)
     ap.add_argument("--encoder", default="FacebookAI/xlm-roberta-base")
     ap.add_argument("--augment", action="store_true")
-    ap.add_argument("--epochs", type=int, default=4)
-    ap.add_argument("--bs", type=int, default=32)
+    ap.add_argument("--epochs", type=int, default=3)
+    ap.add_argument("--bs", type=int, default=16)
+    ap.add_argument("--accum", type=int, default=2)
     ap.add_argument("--lr", type=float, default=3e-5)
     ap.add_argument("--head-lr", type=float, default=1e-3)
     ap.add_argument("--max-len", type=int, default=64)

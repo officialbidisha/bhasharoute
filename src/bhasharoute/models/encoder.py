@@ -42,14 +42,20 @@ class RequestDataset(Dataset):
 class Collator:
     """Tokenises a batch with *dynamic* padding: each batch is padded only to its own
     longest sequence (MASSIVE requests are short, ~15 sub-words), and the attention mask
-    marks real tokens (1) vs padding (0) so neither attention nor pooling sees pads."""
+    marks real tokens (1) vs padding (0) so neither attention nor pooling sees pads.
 
-    def __init__(self, tokenizer, max_len: int = 64):
-        self.tok, self.max_len = tokenizer, max_len
+    Lengths are rounded up to a multiple of 16. On Apple MPS every new input shape
+    compiles and caches a new kernel graph; fully dynamic lengths produced dozens of
+    shapes, the cache grew past 5 GB on an 8 GB machine and training thrashed swap.
+    Bucketing to {16, 32, 48, 64} keeps the cache small at a negligible padding cost."""
+
+    def __init__(self, tokenizer, max_len: int = 64, pad_multiple: int = 16):
+        self.tok, self.max_len, self.pad_multiple = tokenizer, max_len, pad_multiple
 
     def __call__(self, batch: list[dict]) -> dict[str, torch.Tensor]:
         enc = self.tok([b["text"] for b in batch], padding=True, truncation=True,
-                       max_length=self.max_len, return_tensors="pt")
+                       max_length=self.max_len, pad_to_multiple_of=self.pad_multiple,
+                       return_tensors="pt")
         return {
             "input_ids": enc["input_ids"],
             "attention_mask": enc["attention_mask"],
