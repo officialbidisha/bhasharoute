@@ -35,6 +35,16 @@ from bhasharoute.labels import SCENARIO_TO_ID
 from bhasharoute.models.encoder import Collator, RequestDataset, RouterNet, load_tokenizer
 
 
+def resolve_revision(name: str) -> str:
+    """Commit sha of the base checkpoint, recorded so the frozen weights that are NOT in
+    our checkpoint reload bit-identically later (transformers v5 no longer exposes
+    config._commit_hash). Uses the local cache when offline."""
+    from pathlib import Path
+
+    from huggingface_hub import snapshot_download
+    return Path(snapshot_download(name, allow_patterns=["config.json"])).name
+
+
 def set_seed(seed: int) -> None:
     random.seed(seed)
     np.random.seed(seed)
@@ -245,13 +255,14 @@ def main() -> None:
     name = f"C_xlmr_{args.mode}" + ("_aug" if args.augment else "") + ("_debug" if args.limit else "")
     out_dir = ARTIFACTS_DIR / name
 
-    tok = load_tokenizer(args.encoder)
+    revision = resolve_revision(args.encoder)
+    tok = load_tokenizer(args.encoder, revision)
     model = RouterNet(args.encoder, len(SCENARIO_TO_ID), args.mode,
-                      head_hidden=256 if args.mode == "frozen" else 0).to(device)
+                      head_hidden=256 if args.mode == "frozen" else 0, revision=revision).to(device)
     n_all = sum(p.numel() for p in model.parameters())
     n_train = sum(p.numel() for p in model.parameters() if p.requires_grad)
     cfg = {"name": name, "encoder": args.encoder,
-           "revision": getattr(model.encoder.config, "_commit_hash", None), "mode": args.mode,
+           "revision": revision, "mode": args.mode,
            "augment": args.augment, "head_hidden": 256 if args.mode == "frozen" else 0,
            "n_scenarios": len(SCENARIO_TO_ID), "labels": list(SCENARIO_TO_ID), "max_len": args.max_len,
            "params_total": n_all, "params_trainable": n_train, "n_train": len(tr), "n_dev": len(dv),
