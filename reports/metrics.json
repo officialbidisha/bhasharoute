@@ -1,0 +1,2821 @@
+{
+  "_data": {
+    "native_all": 8157,
+    "native_en": 2815,
+    "native_hi": 2681,
+    "native_bn": 2661,
+    "human_codemix": 452,
+    "synthetic_romanized": 5318,
+    "synthetic_codemix": 3493,
+    "synthetic_codemix_romanized": 3454,
+    "ood_native": 386,
+    "dev": 5598
+  },
+  "A_rules": {
+    "name": "A_rules",
+    "calibration": null,
+    "sets": {
+      "native_all": {
+        "n": 8157,
+        "accuracy": 0.5432144170650974,
+        "macro_f1": 0.6200087280291531,
+        "no_answer_rate": 0.36030403334559274,
+        "per_class": {
+          "alarm": {
+            "precision": 0.9775784753363229,
+            "recall": 0.7870036101083032,
+            "f1": 0.872,
+            "support": 277
+          },
+          "audio": {
+            "precision": 0.8804347826086957,
+            "recall": 0.4909090909090909,
+            "f1": 0.6303501945525292,
+            "support": 165
+          },
+          "calendar": {
+            "precision": 0.9074778200253485,
+            "recall": 0.6052409129332206,
+            "f1": 0.7261663286004056,
+            "support": 1183
+          },
+          "datetime": {
+            "precision": 0.6388888888888888,
+            "recall": 0.5897435897435898,
+            "f1": 0.6133333333333333,
+            "support": 273
+          },
+          "email": {
+            "precision": 0.9802955665024631,
+            "recall": 0.7518891687657431,
+            "f1": 0.8510334996436208,
+            "support": 794
+          },
+          "general": {
+            "precision": 0.6129032258064516,
+            "recall": 0.06822262118491922,
+            "f1": 0.12277867528271405,
+            "support": 557
+          },
+          "iot": {
+            "precision": 0.958904109589041,
+            "recall": 0.7082630691399663,
+            "f1": 0.8147429679922406,
+            "support": 593
+          },
+          "lists": {
+            "precision": 0.7953367875647669,
+            "recall": 0.7580246913580246,
+            "f1": 0.7762326169405815,
+            "support": 405
+          },
+          "music": {
+            "precision": 0.3383458646616541,
+            "recall": 0.1956521739130435,
+            "f1": 0.24793388429752067,
+            "support": 230
+          },
+          "news": {
+            "precision": 0.9736842105263158,
+            "recall": 0.5167597765363129,
+            "f1": 0.6751824817518248,
+            "support": 358
+          },
+          "play": {
+            "precision": 0.856396866840731,
+            "recall": 0.590990990990991,
+            "f1": 0.6993603411513859,
+            "support": 1110
+          },
+          "qa": {
+            "precision": 0.5750577367205543,
+            "recall": 0.2971360381861575,
+            "f1": 0.3918174665617624,
+            "support": 838
+          },
+          "recommendation": {
+            "precision": 0.6590909090909091,
+            "recall": 0.1039426523297491,
+            "f1": 0.17956656346749225,
+            "support": 279
+          },
+          "social": {
+            "precision": 0.9578059071729957,
+            "recall": 0.737012987012987,
+            "f1": 0.8330275229357799,
+            "support": 308
+          },
+          "transport": {
+            "precision": 0.8602150537634409,
+            "recall": 0.6593406593406593,
+            "f1": 0.7465007776049767,
+            "support": 364
+          },
+          "weather": {
+            "precision": 0.9192982456140351,
+            "recall": 0.6193853427895981,
+            "f1": 0.7401129943502824,
+            "support": 423
+          }
+        },
+        "side_effect_model": {
+          "precision": 0.7447137699845281,
+          "recall": 0.5291315500183217,
+          "f1": 0.6186803770351328,
+          "n_pos": 2729,
+          "n": 8157
+        },
+        "side_effect_gate": {
+          "precision": 0.7447137699845281,
+          "recall": 0.5291315500183217,
+          "f1": 0.6186803770351328,
+          "n_pos": 2729,
+          "n": 8157
+        }
+      },
+      "native_en": {
+        "n": 2815,
+        "accuracy": 0.5730017761989343,
+        "macro_f1": 0.6423425892967818,
+        "no_answer_rate": 0.3371225577264654,
+        "side_effect_model": {
+          "precision": 0.8459069020866774,
+          "recall": 0.5582627118644068,
+          "f1": 0.6726228462029356,
+          "n_pos": 944,
+          "n": 2815
+        },
+        "side_effect_gate": {
+          "precision": 0.8459069020866774,
+          "recall": 0.5582627118644068,
+          "f1": 0.6726228462029356,
+          "n_pos": 944,
+          "n": 2815
+        }
+      },
+      "native_hi": {
+        "n": 2681,
+        "accuracy": 0.5326370757180157,
+        "macro_f1": 0.599725289057301,
+        "no_answer_rate": 0.3588213353226408,
+        "side_effect_model": {
+          "precision": 0.6719883889695211,
+          "recall": 0.512735326688815,
+          "f1": 0.5816582914572864,
+          "n_pos": 903,
+          "n": 2681
+        },
+        "side_effect_gate": {
+          "precision": 0.6719883889695211,
+          "recall": 0.512735326688815,
+          "f1": 0.5816582914572864,
+          "n_pos": 903,
+          "n": 2681
+        }
+      },
+      "native_bn": {
+        "n": 2661,
+        "accuracy": 0.5223600150319428,
+        "macro_f1": 0.6074149304069483,
+        "no_answer_rate": 0.38632093198045847,
+        "side_effect_model": {
+          "precision": 0.7240829346092504,
+          "recall": 0.5147392290249433,
+          "f1": 0.6017229953611664,
+          "n_pos": 882,
+          "n": 2661
+        },
+        "side_effect_gate": {
+          "precision": 0.7240829346092504,
+          "recall": 0.5147392290249433,
+          "f1": 0.6017229953611664,
+          "n_pos": 882,
+          "n": 2661
+        }
+      },
+      "human_codemix": {
+        "n": 452,
+        "accuracy": 0.6305309734513275,
+        "macro_f1": 0.5814375114450818,
+        "no_answer_rate": 0.2743362831858407,
+        "side_effect_model": {
+          "precision": 0.8145695364238411,
+          "recall": 0.5885167464114832,
+          "f1": 0.6833333333333333,
+          "n_pos": 209,
+          "n": 452
+        },
+        "side_effect_gate": {
+          "precision": 0.8145695364238411,
+          "recall": 0.5885167464114832,
+          "f1": 0.6833333333333333,
+          "n_pos": 209,
+          "n": 452
+        }
+      },
+      "synthetic_romanized": {
+        "n": 5318,
+        "accuracy": 0.2525385483264385,
+        "macro_f1": 0.3667739238996466,
+        "no_answer_rate": 0.6978187288454306,
+        "side_effect_model": {
+          "precision": 0.6460905349794238,
+          "recall": 0.1768018018018018,
+          "f1": 0.27763041556145,
+          "n_pos": 1776,
+          "n": 5318
+        },
+        "side_effect_gate": {
+          "precision": 0.6460905349794238,
+          "recall": 0.1768018018018018,
+          "f1": 0.27763041556145,
+          "n_pos": 1776,
+          "n": 5318
+        }
+      },
+      "synthetic_codemix": {
+        "n": 3493,
+        "accuracy": 0.5648439736616089,
+        "macro_f1": 0.63052314461274,
+        "no_answer_rate": 0.3461208130546808,
+        "side_effect_model": {
+          "precision": 0.7836593785960875,
+          "recall": 0.5642087821043911,
+          "f1": 0.6560693641618497,
+          "n_pos": 1207,
+          "n": 3493
+        },
+        "side_effect_gate": {
+          "precision": 0.7836593785960875,
+          "recall": 0.5642087821043911,
+          "f1": 0.6560693641618497,
+          "n_pos": 1207,
+          "n": 3493
+        }
+      },
+      "synthetic_codemix_romanized": {
+        "n": 3454,
+        "accuracy": 0.3960625361899247,
+        "macro_f1": 0.494297295479373,
+        "no_answer_rate": 0.5454545454545454,
+        "side_effect_model": {
+          "precision": 0.71,
+          "recall": 0.23666666666666666,
+          "f1": 0.355,
+          "n_pos": 1200,
+          "n": 3454
+        },
+        "side_effect_gate": {
+          "precision": 0.71,
+          "recall": 0.23666666666666666,
+          "f1": 0.355,
+          "n_pos": 1200,
+          "n": 3454
+        }
+      }
+    },
+    "ood": {
+      "n": 386,
+      "abstain_rate_at_tau": 0.9067357512953368,
+      "unseen_domain_side_effect_gate_recall": 0.6666666666666666,
+      "unseen_domain_side_effect_model_recall": 0.6666666666666666
+    },
+    "consistency_en_hi_bn": 0.6066763425253991,
+    "consistency_native_vs_romanized": 0.648674064321986,
+    "challenge": {
+      "routing_accuracy": 0.7659574468085106,
+      "per_category": {
+        "negation": "6/6",
+        "ambiguous": "4/4",
+        "unseen_terms": "1/5",
+        "unsupported": "6/7",
+        "codemix": "9/12",
+        "indirect_write": "5/7",
+        "read_only": "5/6"
+      },
+      "side_effects_gated": "12/22",
+      "ungated_side_effects": [
+        "AC ka temperature 24 kar do",
+        "ফ্রিজের তাপমাত্রা কমিয়ে দাও",
+        "mere calendar mein Friday ko dentist appointment daal do",
+        "could you let my manager know by email that I'm sick today",
+        "I won't need the 7 am wake-up call anymore",
+        "make it brighter in here",
+        "put eggs on my grocery list",
+        "tell everyone on twitter the concert was amazing",
+        "শুক্রবার বিকেলে মায়ের সাথে একটা মিটিং রাখো",
+        "file my income tax return"
+      ],
+      "extra_confirmations_on_read_only": "6/22",
+      "items": [
+        {
+          "id": "ch-000",
+          "text": "don't turn off the lights",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-001",
+          "text": "lights band mat karo abhi",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-002",
+          "text": "alarm mat lagao kal ke liye",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-003",
+          "text": "আলো বন্ধ কোরো না",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-004",
+          "text": "अभी मेल मत भेजो",
+          "expected": "email",
+          "got": "email",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-005",
+          "text": "cancel the 6 am alarm, I don't need it",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-006",
+          "text": "do the thing from yesterday again",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": null,
+          "gated": false
+        },
+        {
+          "id": "ch-007",
+          "text": "kal wala kaam phir se karo",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": null,
+          "gated": false
+        },
+        {
+          "id": "ch-008",
+          "text": "ওটা আবার করো",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": null,
+          "gated": false
+        },
+        {
+          "id": "ch-009",
+          "text": "hmm okay",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-010",
+          "text": "book me an Ola to the airport",
+          "expected": "transport",
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-011",
+          "text": "turn on the geyser",
+          "expected": "iot",
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-012",
+          "text": "AC ka temperature 24 kar do",
+          "expected": "iot",
+          "got": "weather",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-013",
+          "text": "ফ্রিজের তাপমাত্রা কমিয়ে দাও",
+          "expected": "iot",
+          "got": "weather",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-014",
+          "text": "Swiggy se biryani order karo",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-015",
+          "text": "UPI se Amit ko 500 rupaye bhej do",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-016",
+          "text": "kal subah 6 baje ka alarm set kar do",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-017",
+          "text": "aaj baarish hogi kya",
+          "expected": "weather",
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-018",
+          "text": "mere calendar mein Friday ko dentist appointment daal do",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-019",
+          "text": "ekta gaan chalao na",
+          "expected": "play",
+          "got": "play",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-020",
+          "text": "kalke office er meeting ta cancel koro",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-021",
+          "text": "আজকে weather কেমন থাকবে",
+          "expected": "weather",
+          "got": "weather",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-022",
+          "text": "ভলিউমটা একটু বাড়াও",
+          "expected": "audio",
+          "got": "audio",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-023",
+          "text": "aaj ki news mein kya hai",
+          "expected": "news",
+          "got": "qa",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-024",
+          "text": "mom ko email bhejo ki main late hun",
+          "expected": "email",
+          "got": "email",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-025",
+          "text": "shopping list theke milk ta remove koro",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-026",
+          "text": "bhai ek joke sunao",
+          "expected": "general",
+          "got": "general",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-027",
+          "text": "Mumbai ka time kya hua hai abhi",
+          "expected": "datetime",
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-028",
+          "text": "could you let my manager know by email that I'm sick today",
+          "expected": "email",
+          "got": "email",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-029",
+          "text": "I won't need the 7 am wake-up call anymore",
+          "expected": "alarm",
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-030",
+          "text": "make it brighter in here",
+          "expected": "iot",
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-031",
+          "text": "put eggs on my grocery list",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-032",
+          "text": "tell everyone on twitter the concert was amazing",
+          "expected": "social",
+          "got": "social",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-033",
+          "text": "मेरी शॉपिंग लिस्ट में दूध जोड़ दो",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-034",
+          "text": "শুক্রবার বিকেলে মায়ের সাথে একটা মিটিং রাখো",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        },
+        {
+          "id": "ch-035",
+          "text": "what's on my shopping list",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-036",
+          "text": "मुझे बताओ आज मेरे कैलेंडर में क्या है",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-037",
+          "text": "আমার আজকের মিটিংগুলো কী কী",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-038",
+          "text": "how much is one dollar in rupees",
+          "expected": "qa",
+          "got": "qa",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-039",
+          "text": "do I have any new emails from Priya",
+          "expected": "email",
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-040",
+          "text": "kya kal ke liye koi alarm laga hua hai",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-041",
+          "text": "how do I make paneer butter masala",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-042",
+          "text": "मुझे पनीर की रेसिपी बताओ",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-043",
+          "text": "আমার জন্য বিরিয়ানি অর্ডার করো",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-044",
+          "text": "order a large pizza from Dominos",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-045",
+          "text": "what is my blood pressure trend this week",
+          "expected": null,
+          "got": "qa",
+          "confidence": null,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-046",
+          "text": "file my income tax return",
+          "expected": null,
+          "got": null,
+          "confidence": null,
+          "expected_side_effect": true,
+          "gated": false
+        }
+      ]
+    },
+    "errors": {
+      "en": [
+        {
+          "text": "do i have anything planned for the twenty first",
+          "gold": "calendar",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "show pending reminders",
+          "gold": "calendar",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "when is my friend's birthday coming up",
+          "gold": "general",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "economic affairs",
+          "gold": "news",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "find songs from my big band playlist",
+          "gold": "play",
+          "pred": "music",
+          "confidence": null
+        },
+        {
+          "text": "who are your developers",
+          "gold": "general",
+          "pred": null,
+          "confidence": null
+        }
+      ],
+      "hi": [
+        {
+          "text": "प्रदर्शन तिथि",
+          "gold": "datetime",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "कृपया मेरी मिलाई गई प्लेलिस्ट चलाएं",
+          "gold": "play",
+          "pred": "lists",
+          "confidence": null
+        },
+        {
+          "text": "मुझे अभी समय जानने की जरूरत है कि यह क्या है",
+          "gold": "datetime",
+          "pred": "qa",
+          "confidence": null
+        },
+        {
+          "text": "भारत में अमेरिकी डॉलर का मूल्य कितना है",
+          "gold": "qa",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "चलो बात करते हैं",
+          "gold": "general",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "कृपया शनिवार को मेरे डॉक्टर के साथ मेरी नियुक्ति को हटा दें",
+          "gold": "calendar",
+          "pred": null,
+          "confidence": null
+        }
+      ],
+      "bn": [
+        {
+          "text": "ঢাকাতে এখন কয়টা বাজে",
+          "gold": "datetime",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "আমি শনিবার রাত এ বিক্রি হওয়া কনসার্টের টিকিট চাই",
+          "gold": "general",
+          "pred": "transport",
+          "confidence": null
+        },
+        {
+          "text": "আমাকে চ্যানেল আই থেকে সর্বশেষ শিরোনাম পড়ুন",
+          "gold": "news",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "আমার পরিবার এবং বন্ধু তালিকায় কে আছে শাকিল দয়া করে একটি ইমেল পাঠান",
+          "gold": "email",
+          "pred": "lists",
+          "confidence": null
+        },
+        {
+          "text": "কোস্টক এর জন্য আমাকে সর্বশেষ স্টক মূল্য দেন",
+          "gold": "news",
+          "pred": null,
+          "confidence": null
+        },
+        {
+          "text": "আজ আমার সময়সূচী কি",
+          "gold": "calendar",
+          "pred": "datetime",
+          "confidence": null
+        }
+      ],
+      "top_confusions": [
+        {
+          "gold": "music",
+          "pred": "play",
+          "count": 92
+        },
+        {
+          "gold": "play",
+          "pred": "music",
+          "count": 72
+        },
+        {
+          "gold": "calendar",
+          "pred": "datetime",
+          "count": 46
+        },
+        {
+          "gold": "news",
+          "pred": "qa",
+          "count": 39
+        },
+        {
+          "gold": "play",
+          "pred": "lists",
+          "count": 29
+        },
+        {
+          "gold": "datetime",
+          "pred": "qa",
+          "count": 27
+        },
+        {
+          "gold": "weather",
+          "pred": "qa",
+          "count": 26
+        },
+        {
+          "gold": "transport",
+          "pred": "datetime",
+          "count": 22
+        }
+      ]
+    },
+    "efficiency": {
+      "latency_cpu": {
+        "p50_ms": 0.07364550037891604,
+        "p95_ms": 0.15420624940816188,
+        "mean_ms": 0.08169645496309386,
+        "n": 200
+      }
+    }
+  },
+  "B_tfidf": {
+    "name": "B_tfidf",
+    "calibration": {
+      "temperature": 0.7043358553163787,
+      "side_temperature": 0.9371841515544094,
+      "abstain_threshold": 0.4183582452143966,
+      "side_threshold": 0.02735170697418368,
+      "fitted_on": "dev native in-domain (n=5598)",
+      "policy": "tau keeps 95% of dev requests; side threshold gives >=99% dev recall"
+    },
+    "sets": {
+      "native_all": {
+        "n": 8157,
+        "accuracy": 0.8829226431286012,
+        "macro_f1": 0.876846223938976,
+        "no_answer_rate": 0.0,
+        "per_class": {
+          "alarm": {
+            "precision": 0.9705882352941176,
+            "recall": 0.9530685920577617,
+            "f1": 0.9617486338797814,
+            "support": 277
+          },
+          "audio": {
+            "precision": 0.9197530864197531,
+            "recall": 0.9030303030303031,
+            "f1": 0.9113149847094801,
+            "support": 165
+          },
+          "calendar": {
+            "precision": 0.9285714285714286,
+            "recall": 0.9120879120879121,
+            "f1": 0.9202558635394457,
+            "support": 1183
+          },
+          "datetime": {
+            "precision": 0.875886524822695,
+            "recall": 0.9047619047619048,
+            "f1": 0.8900900900900901,
+            "support": 273
+          },
+          "email": {
+            "precision": 0.9615384615384616,
+            "recall": 0.9445843828715366,
+            "f1": 0.9529860228716646,
+            "support": 794
+          },
+          "general": {
+            "precision": 0.6173285198555957,
+            "recall": 0.6140035906642729,
+            "f1": 0.6156615661566157,
+            "support": 557
+          },
+          "iot": {
+            "precision": 0.9688041594454073,
+            "recall": 0.9426644182124789,
+            "f1": 0.9555555555555556,
+            "support": 593
+          },
+          "lists": {
+            "precision": 0.9181585677749361,
+            "recall": 0.8864197530864197,
+            "f1": 0.9020100502512562,
+            "support": 405
+          },
+          "music": {
+            "precision": 0.7866108786610879,
+            "recall": 0.8173913043478261,
+            "f1": 0.8017057569296375,
+            "support": 230
+          },
+          "news": {
+            "precision": 0.8265582655826558,
+            "recall": 0.8519553072625698,
+            "f1": 0.8390646492434664,
+            "support": 358
+          },
+          "play": {
+            "precision": 0.9487418452935694,
+            "recall": 0.9171171171171171,
+            "f1": 0.9326614750343564,
+            "support": 1110
+          },
+          "qa": {
+            "precision": 0.7929515418502202,
+            "recall": 0.8591885441527446,
+            "f1": 0.8247422680412371,
+            "support": 838
+          },
+          "recommendation": {
+            "precision": 0.7413249211356467,
+            "recall": 0.8422939068100358,
+            "f1": 0.7885906040268457,
+            "support": 279
+          },
+          "social": {
+            "precision": 0.9475524475524476,
+            "recall": 0.8798701298701299,
+            "f1": 0.9124579124579124,
+            "support": 308
+          },
+          "transport": {
+            "precision": 0.9106145251396648,
+            "recall": 0.8956043956043956,
+            "f1": 0.9030470914127424,
+            "support": 364
+          },
+          "weather": {
+            "precision": 0.9133489461358314,
+            "recall": 0.9219858156028369,
+            "f1": 0.9176470588235294,
+            "support": 423
+          }
+        },
+        "ece_uncalibrated": 0.06751148414322147,
+        "ece_calibrated": 0.011410617621470777,
+        "selective_at_tau": {
+          "coverage": 0.9562339095255609,
+          "selective_accuracy": 0.9087179487179488,
+          "risk_if_answering_all": 0.11707735687139875
+        },
+        "side_effect_model": {
+          "precision": 0.6381779760507161,
+          "recall": 0.9959692194943203,
+          "f1": 0.7779049799656554,
+          "n_pos": 2729,
+          "n": 8157,
+          "auroc": 0.98833174509006
+        },
+        "side_effect_gate": {
+          "precision": 0.6038196757717077,
+          "recall": 0.9963356540857456,
+          "f1": 0.7519358407079646,
+          "n_pos": 2729,
+          "n": 8157
+        }
+      },
+      "native_en": {
+        "n": 2815,
+        "accuracy": 0.8909413854351688,
+        "macro_f1": 0.885232126222794,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.055717631301105325,
+        "ece_calibrated": 0.01717319094068146,
+        "selective_at_tau": {
+          "coverage": 0.9630550621669627,
+          "selective_accuracy": 0.9140538546661748,
+          "risk_if_answering_all": 0.10905861456483124
+        },
+        "side_effect_model": {
+          "precision": 0.6557491289198606,
+          "recall": 0.996822033898305,
+          "f1": 0.791088692728037,
+          "n_pos": 944,
+          "n": 2815,
+          "auroc": 0.9902849242225222
+        },
+        "side_effect_gate": {
+          "precision": 0.639266304347826,
+          "recall": 0.996822033898305,
+          "f1": 0.7789735099337748,
+          "n_pos": 944,
+          "n": 2815
+        }
+      },
+      "native_hi": {
+        "n": 2681,
+        "accuracy": 0.8839985080193957,
+        "macro_f1": 0.877292247156444,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.07630178173921283,
+        "ece_calibrated": 0.01318562414939682,
+        "selective_at_tau": {
+          "coverage": 0.9571055576277508,
+          "selective_accuracy": 0.9091971940763834,
+          "risk_if_answering_all": 0.11600149198060428
+        },
+        "side_effect_model": {
+          "precision": 0.6284114765570329,
+          "recall": 0.9944629014396457,
+          "f1": 0.7701543739279588,
+          "n_pos": 903,
+          "n": 2681,
+          "auroc": 0.9880768641461345
+        },
+        "side_effect_gate": {
+          "precision": 0.58,
+          "recall": 0.9955703211517165,
+          "f1": 0.7329800244598451,
+          "n_pos": 903,
+          "n": 2681
+        }
+      },
+      "native_bn": {
+        "n": 2661,
+        "accuracy": 0.8733558812476513,
+        "macro_f1": 0.8671248383422445,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.07139239099005998,
+        "ece_calibrated": 0.01967319721138439,
+        "selective_at_tau": {
+          "coverage": 0.9481397970687712,
+          "selective_accuracy": 0.9024970273483948,
+          "risk_if_answering_all": 0.1266441187523487
+        },
+        "side_effect_model": {
+          "precision": 0.6301075268817204,
+          "recall": 0.9965986394557823,
+          "f1": 0.7720685111989459,
+          "n_pos": 882,
+          "n": 2661,
+          "auroc": 0.9863990190417558
+        },
+        "side_effect_gate": {
+          "precision": 0.5935178933153274,
+          "recall": 0.9965986394557823,
+          "f1": 0.7439695302581464,
+          "n_pos": 882,
+          "n": 2661
+        }
+      },
+      "human_codemix": {
+        "n": 452,
+        "accuracy": 0.9292035398230089,
+        "macro_f1": 0.9017174910644337,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.0820878764091988,
+        "ece_calibrated": 0.03711155138978348,
+        "selective_at_tau": {
+          "coverage": 0.9756637168141593,
+          "selective_accuracy": 0.9387755102040817,
+          "risk_if_answering_all": 0.07079646017699115
+        },
+        "side_effect_model": {
+          "precision": 0.7314487632508834,
+          "recall": 0.9904306220095693,
+          "f1": 0.8414634146341463,
+          "n_pos": 209,
+          "n": 452,
+          "auroc": 0.9840707267607852
+        },
+        "side_effect_gate": {
+          "precision": 0.6933333333333334,
+          "recall": 0.9952153110047847,
+          "f1": 0.8172888015717092,
+          "n_pos": 209,
+          "n": 452
+        }
+      },
+      "synthetic_romanized": {
+        "n": 5318,
+        "accuracy": 0.210793531402783,
+        "macro_f1": 0.18198492806067038,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.17481052334797104,
+        "ece_calibrated": 0.3309364675720065,
+        "selective_at_tau": {
+          "coverage": 0.6820233170364799,
+          "selective_accuracy": 0.2453818582850841,
+          "risk_if_answering_all": 0.789206468597217
+        },
+        "side_effect_model": {
+          "precision": 0.34391013007489163,
+          "recall": 0.982545045045045,
+          "f1": 0.5094890510948905,
+          "n_pos": 1776,
+          "n": 5318,
+          "auroc": 0.6609724490159272
+        },
+        "side_effect_gate": {
+          "precision": 0.34435912581216777,
+          "recall": 0.9847972972972973,
+          "f1": 0.5102844638949672,
+          "n_pos": 1776,
+          "n": 5318
+        }
+      },
+      "synthetic_codemix": {
+        "n": 3493,
+        "accuracy": 0.8989407386200974,
+        "macro_f1": 0.8643460703972736,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.076949698096563,
+        "ece_calibrated": 0.020173365544420934,
+        "selective_at_tau": {
+          "coverage": 0.9633552819925565,
+          "selective_accuracy": 0.9167904903417533,
+          "risk_if_answering_all": 0.10105926137990262
+        },
+        "side_effect_model": {
+          "precision": 0.6417910447761194,
+          "recall": 0.9975144987572494,
+          "f1": 0.7810574116120662,
+          "n_pos": 1207,
+          "n": 3493,
+          "auroc": 0.9900232023606824
+        },
+        "side_effect_gate": {
+          "precision": 0.6133469179826796,
+          "recall": 0.9975144987572494,
+          "f1": 0.759621451104101,
+          "n_pos": 1207,
+          "n": 3493
+        }
+      },
+      "synthetic_codemix_romanized": {
+        "n": 3454,
+        "accuracy": 0.5512449334105385,
+        "macro_f1": 0.5043845669869218,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.05495032162802021,
+        "ece_calibrated": 0.08319372472035005,
+        "selective_at_tau": {
+          "coverage": 0.7269832078749277,
+          "selective_accuracy": 0.6646754281162883,
+          "risk_if_answering_all": 0.4487550665894615
+        },
+        "side_effect_model": {
+          "precision": 0.3964477211796247,
+          "recall": 0.9858333333333333,
+          "f1": 0.5654875717017208,
+          "n_pos": 1200,
+          "n": 3454,
+          "auroc": 0.8314174800354924
+        },
+        "side_effect_gate": {
+          "precision": 0.39453515494835056,
+          "recall": 0.9866666666666667,
+          "f1": 0.563675315401095,
+          "n_pos": 1200,
+          "n": 3454
+        }
+      }
+    },
+    "ood": {
+      "n": 386,
+      "auroc": 0.8982491277081067,
+      "fpr_at_95tpr": 0.6295336787564767,
+      "abstain_rate_at_tau": 0.34196891191709844,
+      "false_accept_routed_to": {
+        "general": 146,
+        "qa": 41,
+        "transport": 22,
+        "recommendation": 17,
+        "lists": 11
+      },
+      "unseen_domain_side_effect_gate_recall": 0.9393939393939394,
+      "unseen_domain_side_effect_model_recall": 0.9242424242424242
+    },
+    "consistency_en_hi_bn": 0.8570391872278664,
+    "consistency_native_vs_romanized": 0.21835621591122814,
+    "challenge": {
+      "routing_accuracy": 0.7446808510638298,
+      "per_category": {
+        "negation": "6/6",
+        "ambiguous": "1/4",
+        "unseen_terms": "3/5",
+        "unsupported": "4/7",
+        "codemix": "9/12",
+        "indirect_write": "6/7",
+        "read_only": "6/6"
+      },
+      "side_effects_gated": "22/22",
+      "ungated_side_effects": [],
+      "extra_confirmations_on_read_only": "11/22",
+      "items": [
+        {
+          "id": "ch-000",
+          "text": "don't turn off the lights",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-001",
+          "text": "lights band mat karo abhi",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 0.983,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-002",
+          "text": "alarm mat lagao kal ke liye",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 0.999,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-003",
+          "text": "আলো বন্ধ কোরো না",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 0.999,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-004",
+          "text": "अभी मेल मत भेजो",
+          "expected": "email",
+          "got": "email",
+          "confidence": 0.999,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-005",
+          "text": "cancel the 6 am alarm, I don't need it",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 0.997,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-006",
+          "text": "do the thing from yesterday again",
+          "expected": null,
+          "got": null,
+          "confidence": 0.243,
+          "expected_side_effect": null,
+          "gated": true
+        },
+        {
+          "id": "ch-007",
+          "text": "kal wala kaam phir se karo",
+          "expected": null,
+          "got": "qa",
+          "confidence": 0.443,
+          "expected_side_effect": null,
+          "gated": true
+        },
+        {
+          "id": "ch-008",
+          "text": "ওটা আবার করো",
+          "expected": null,
+          "got": "play",
+          "confidence": 0.771,
+          "expected_side_effect": null,
+          "gated": true
+        },
+        {
+          "id": "ch-009",
+          "text": "hmm okay",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.601,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-010",
+          "text": "book me an Ola to the airport",
+          "expected": "transport",
+          "got": "transport",
+          "confidence": 0.976,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-011",
+          "text": "turn on the geyser",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 0.907,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-012",
+          "text": "AC ka temperature 24 kar do",
+          "expected": "iot",
+          "got": "weather",
+          "confidence": 0.995,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-013",
+          "text": "ফ্রিজের তাপমাত্রা কমিয়ে দাও",
+          "expected": "iot",
+          "got": "weather",
+          "confidence": 0.793,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-014",
+          "text": "Swiggy se biryani order karo",
+          "expected": null,
+          "got": null,
+          "confidence": 0.413,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-015",
+          "text": "UPI se Amit ko 500 rupaye bhej do",
+          "expected": null,
+          "got": null,
+          "confidence": 0.413,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-016",
+          "text": "kal subah 6 baje ka alarm set kar do",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 0.998,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-017",
+          "text": "aaj baarish hogi kya",
+          "expected": "weather",
+          "got": "qa",
+          "confidence": 0.865,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-018",
+          "text": "mere calendar mein Friday ko dentist appointment daal do",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-019",
+          "text": "ekta gaan chalao na",
+          "expected": "play",
+          "got": "qa",
+          "confidence": 0.494,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-020",
+          "text": "kalke office er meeting ta cancel koro",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.987,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-021",
+          "text": "আজকে weather কেমন থাকবে",
+          "expected": "weather",
+          "got": "weather",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-022",
+          "text": "ভলিউমটা একটু বাড়াও",
+          "expected": "audio",
+          "got": "audio",
+          "confidence": 0.996,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-023",
+          "text": "aaj ki news mein kya hai",
+          "expected": "news",
+          "got": "news",
+          "confidence": 0.942,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-024",
+          "text": "mom ko email bhejo ki main late hun",
+          "expected": "email",
+          "got": "email",
+          "confidence": 0.999,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-025",
+          "text": "shopping list theke milk ta remove koro",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-026",
+          "text": "bhai ek joke sunao",
+          "expected": "general",
+          "got": "general",
+          "confidence": 0.98,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-027",
+          "text": "Mumbai ka time kya hua hai abhi",
+          "expected": "datetime",
+          "got": null,
+          "confidence": 0.333,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-028",
+          "text": "could you let my manager know by email that I'm sick today",
+          "expected": "email",
+          "got": "email",
+          "confidence": 0.883,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-029",
+          "text": "I won't need the 7 am wake-up call anymore",
+          "expected": "alarm",
+          "got": null,
+          "confidence": 0.34,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-030",
+          "text": "make it brighter in here",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 0.991,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-031",
+          "text": "put eggs on my grocery list",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-032",
+          "text": "tell everyone on twitter the concert was amazing",
+          "expected": "social",
+          "got": "social",
+          "confidence": 0.977,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-033",
+          "text": "मेरी शॉपिंग लिस्ट में दूध जोड़ दो",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 0.986,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-034",
+          "text": "শুক্রবার বিকেলে মায়ের সাথে একটা মিটিং রাখো",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.997,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-035",
+          "text": "what's on my shopping list",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 0.999,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-036",
+          "text": "मुझे बताओ आज मेरे कैलेंडर में क्या है",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.999,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-037",
+          "text": "আমার আজকের মিটিংগুলো কী কী",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.951,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-038",
+          "text": "how much is one dollar in rupees",
+          "expected": "qa",
+          "got": "qa",
+          "confidence": 0.994,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-039",
+          "text": "do I have any new emails from Priya",
+          "expected": "email",
+          "got": "email",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-040",
+          "text": "kya kal ke liye koi alarm laga hua hai",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 0.863,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-041",
+          "text": "how do I make paneer butter masala",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.435,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-042",
+          "text": "मुझे पनीर की रेसिपी बताओ",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.684,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-043",
+          "text": "আমার জন্য বিরিয়ানি অর্ডার করো",
+          "expected": null,
+          "got": null,
+          "confidence": 0.263,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-044",
+          "text": "order a large pizza from Dominos",
+          "expected": null,
+          "got": null,
+          "confidence": 0.299,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-045",
+          "text": "what is my blood pressure trend this week",
+          "expected": null,
+          "got": null,
+          "confidence": 0.324,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-046",
+          "text": "file my income tax return",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.615,
+          "expected_side_effect": true,
+          "gated": true
+        }
+      ]
+    },
+    "errors": {
+      "en": [
+        {
+          "text": "what's for today",
+          "gold": "calendar",
+          "pred": "general",
+          "confidence": 0.564
+        },
+        {
+          "text": "tell me more about my events",
+          "gold": "general",
+          "pred": "calendar",
+          "confidence": 0.69
+        },
+        {
+          "text": "please know that today i had a meeting with george",
+          "gold": "general",
+          "pred": "calendar",
+          "confidence": 0.527
+        },
+        {
+          "text": "general health tips",
+          "gold": "general",
+          "pred": "qa",
+          "confidence": 0.282
+        },
+        {
+          "text": "comfort my ears with arijit singh",
+          "gold": "play",
+          "pred": "general",
+          "confidence": 0.593
+        },
+        {
+          "text": "vacation spots",
+          "gold": "general",
+          "pred": "play",
+          "confidence": 0.647
+        }
+      ],
+      "hi": [
+        {
+          "text": "आपने भविष्य में किन विशेषताओं को जारी करने की योजना बनाई है",
+          "gold": "general",
+          "pred": "calendar",
+          "confidence": 0.383
+        },
+        {
+          "text": "मुझे तीस मिनट में उठाओ",
+          "gold": "alarm",
+          "pred": "datetime",
+          "confidence": 0.253
+        },
+        {
+          "text": "क्या मुझे अपने अगले डॉक्टर के नियुक्ति के लिए रिमाइंडर अलार्म सेट करना याद है",
+          "gold": "alarm",
+          "pred": "calendar",
+          "confidence": 0.642
+        },
+        {
+          "text": "लोगों में तुलना करना",
+          "gold": "qa",
+          "pred": "general",
+          "confidence": 0.754
+        },
+        {
+          "text": "हेलो आप केस हो",
+          "gold": "general",
+          "pred": "play",
+          "confidence": 0.517
+        },
+        {
+          "text": "चुंबन संगीत कार्यक्रम कहाँ है",
+          "gold": "calendar",
+          "pred": "recommendation",
+          "confidence": 0.889
+        }
+      ],
+      "bn": [
+        {
+          "text": "প্রথম আলো পোস্ট ওয়েবসাইটে যান",
+          "gold": "news",
+          "pred": "social",
+          "confidence": 0.557
+        },
+        {
+          "text": "এখন সবচেয়ে বেশি রেট করা মুভি কি",
+          "gold": "recommendation",
+          "pred": "qa",
+          "confidence": 0.387
+        },
+        {
+          "text": "আমাকে কিছু ভালো শব্দ দাও",
+          "gold": "play",
+          "pred": "music",
+          "confidence": 0.258
+        },
+        {
+          "text": "নতুন আপডেট",
+          "gold": "social",
+          "pred": "news",
+          "confidence": 0.997
+        },
+        {
+          "text": "ডলার থেকে পাউন্ড স্টার্লিং এর বিনিময় হার কত",
+          "gold": "news",
+          "pred": "qa",
+          "confidence": 1.0
+        },
+        {
+          "text": "ডায়েটে লেগে থাকা",
+          "gold": "general",
+          "pred": "qa",
+          "confidence": 0.411
+        }
+      ],
+      "top_confusions": [
+        {
+          "gold": "general",
+          "pred": "qa",
+          "count": 75
+        },
+        {
+          "gold": "qa",
+          "pred": "general",
+          "count": 63
+        },
+        {
+          "gold": "play",
+          "pred": "music",
+          "count": 39
+        },
+        {
+          "gold": "general",
+          "pred": "recommendation",
+          "count": 26
+        },
+        {
+          "gold": "general",
+          "pred": "calendar",
+          "count": 24
+        },
+        {
+          "gold": "general",
+          "pred": "news",
+          "count": 23
+        },
+        {
+          "gold": "calendar",
+          "pred": "recommendation",
+          "count": 20
+        },
+        {
+          "gold": "general",
+          "pred": "play",
+          "count": 19
+        }
+      ]
+    },
+    "efficiency": {
+      "size_mb": 16.788298,
+      "latency_cpu": {
+        "p50_ms": 0.6906459993842873,
+        "p95_ms": 1.0254160492877413,
+        "mean_ms": 0.748302060064816,
+        "n": 200
+      }
+    }
+  },
+  "B_tfidf_aug": {
+    "name": "B_tfidf_aug",
+    "calibration": {
+      "temperature": 0.725797630450279,
+      "side_temperature": 0.7583331146358611,
+      "abstain_threshold": 0.4162506846155037,
+      "side_threshold": 0.04071294096386412,
+      "fitted_on": "dev native in-domain (n=5598)",
+      "policy": "tau keeps 95% of dev requests; side threshold gives >=99% dev recall"
+    },
+    "sets": {
+      "native_all": {
+        "n": 8157,
+        "accuracy": 0.8842711781292142,
+        "macro_f1": 0.8778372328815067,
+        "no_answer_rate": 0.0,
+        "per_class": {
+          "alarm": {
+            "precision": 0.9743589743589743,
+            "recall": 0.9602888086642599,
+            "f1": 0.9672727272727273,
+            "support": 277
+          },
+          "audio": {
+            "precision": 0.9090909090909091,
+            "recall": 0.9090909090909091,
+            "f1": 0.9090909090909091,
+            "support": 165
+          },
+          "calendar": {
+            "precision": 0.9310938845822567,
+            "recall": 0.9137785291631445,
+            "f1": 0.9223549488054608,
+            "support": 1183
+          },
+          "datetime": {
+            "precision": 0.8857142857142857,
+            "recall": 0.9084249084249084,
+            "f1": 0.8969258589511754,
+            "support": 273
+          },
+          "email": {
+            "precision": 0.9616368286445013,
+            "recall": 0.947103274559194,
+            "f1": 0.9543147208121827,
+            "support": 794
+          },
+          "general": {
+            "precision": 0.6114982578397212,
+            "recall": 0.63016157989228,
+            "f1": 0.6206896551724138,
+            "support": 557
+          },
+          "iot": {
+            "precision": 0.9654576856649395,
+            "recall": 0.9426644182124789,
+            "f1": 0.9539249146757679,
+            "support": 593
+          },
+          "lists": {
+            "precision": 0.9183673469387755,
+            "recall": 0.8888888888888888,
+            "f1": 0.903387703889586,
+            "support": 405
+          },
+          "music": {
+            "precision": 0.7922077922077922,
+            "recall": 0.7956521739130434,
+            "f1": 0.7939262472885033,
+            "support": 230
+          },
+          "news": {
+            "precision": 0.825136612021858,
+            "recall": 0.8435754189944135,
+            "f1": 0.8342541436464088,
+            "support": 358
+          },
+          "play": {
+            "precision": 0.9471733086190918,
+            "recall": 0.9207207207207208,
+            "f1": 0.9337597076290544,
+            "support": 1110
+          },
+          "qa": {
+            "precision": 0.8022346368715084,
+            "recall": 0.8568019093078759,
+            "f1": 0.8286208886324293,
+            "support": 838
+          },
+          "recommendation": {
+            "precision": 0.7476038338658147,
+            "recall": 0.8387096774193549,
+            "f1": 0.7905405405405406,
+            "support": 279
+          },
+          "social": {
+            "precision": 0.9440559440559441,
+            "recall": 0.8766233766233766,
+            "f1": 0.9090909090909091,
+            "support": 308
+          },
+          "transport": {
+            "precision": 0.9080779944289693,
+            "recall": 0.8956043956043956,
+            "f1": 0.9017980636237898,
+            "support": 364
+          },
+          "weather": {
+            "precision": 0.9265402843601895,
+            "recall": 0.9243498817966903,
+            "f1": 0.9254437869822485,
+            "support": 423
+          }
+        },
+        "ece_uncalibrated": 0.06154699348383651,
+        "ece_calibrated": 0.012152761364840047,
+        "selective_at_tau": {
+          "coverage": 0.9563565036165257,
+          "selective_accuracy": 0.9088578387386232,
+          "risk_if_answering_all": 0.11572882187078581
+        },
+        "side_effect_model": {
+          "precision": 0.6692991115498519,
+          "recall": 0.9937706119457677,
+          "f1": 0.7998820233003981,
+          "n_pos": 2729,
+          "n": 8157,
+          "auroc": 0.9878230031812572
+        },
+        "side_effect_gate": {
+          "precision": 0.6285317276516906,
+          "recall": 0.9945034811286185,
+          "f1": 0.7702568468851994,
+          "n_pos": 2729,
+          "n": 8157
+        }
+      },
+      "native_en": {
+        "n": 2815,
+        "accuracy": 0.8941385435168739,
+        "macro_f1": 0.8888999592531449,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.049748765276637553,
+        "ece_calibrated": 0.02201581272772321,
+        "selective_at_tau": {
+          "coverage": 0.9644760213143873,
+          "selective_accuracy": 0.9123388581952118,
+          "risk_if_answering_all": 0.10586145648312606
+        },
+        "side_effect_model": {
+          "precision": 0.6846321922796795,
+          "recall": 0.9957627118644068,
+          "f1": 0.8113940440224429,
+          "n_pos": 944,
+          "n": 2815,
+          "auroc": 0.9896383471179193
+        },
+        "side_effect_gate": {
+          "precision": 0.6633733239237827,
+          "recall": 0.9957627118644068,
+          "f1": 0.7962727657772131,
+          "n_pos": 944,
+          "n": 2815
+        }
+      },
+      "native_hi": {
+        "n": 2681,
+        "accuracy": 0.8851174934725848,
+        "macro_f1": 0.8779871869877687,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.06983454445231498,
+        "ece_calibrated": 0.009970704000408788,
+        "selective_at_tau": {
+          "coverage": 0.9567325624766878,
+          "selective_accuracy": 0.9107212475633528,
+          "risk_if_answering_all": 0.11488250652741516
+        },
+        "side_effect_model": {
+          "precision": 0.6664184661206255,
+          "recall": 0.991140642303433,
+          "f1": 0.7969723953695459,
+          "n_pos": 903,
+          "n": 2681,
+          "auroc": 0.987875684974594
+        },
+        "side_effect_gate": {
+          "precision": 0.6081355932203389,
+          "recall": 0.9933554817275747,
+          "f1": 0.7544154751892347,
+          "n_pos": 903,
+          "n": 2681
+        }
+      },
+      "native_bn": {
+        "n": 2661,
+        "accuracy": 0.8729800826756858,
+        "macro_f1": 0.8653464115708998,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.06567818035222207,
+        "ece_calibrated": 0.019424399821905667,
+        "selective_at_tau": {
+          "coverage": 0.9473881999248402,
+          "selective_accuracy": 0.9032130107100357,
+          "risk_if_answering_all": 0.12701991732431417
+        },
+        "side_effect_model": {
+          "precision": 0.656437125748503,
+          "recall": 0.9943310657596371,
+          "f1": 0.7908025247971145,
+          "n_pos": 882,
+          "n": 2661,
+          "auroc": 0.9857139033241178
+        },
+        "side_effect_gate": {
+          "precision": 0.615007012622721,
+          "recall": 0.9943310657596371,
+          "f1": 0.7599653379549394,
+          "n_pos": 882,
+          "n": 2661
+        }
+      },
+      "human_codemix": {
+        "n": 452,
+        "accuracy": 0.9292035398230089,
+        "macro_f1": 0.9035303244346086,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.069908436417107,
+        "ece_calibrated": 0.031422667137561894,
+        "selective_at_tau": {
+          "coverage": 0.9756637168141593,
+          "selective_accuracy": 0.9433106575963719,
+          "risk_if_answering_all": 0.07079646017699115
+        },
+        "side_effect_model": {
+          "precision": 0.7463768115942029,
+          "recall": 0.9856459330143541,
+          "f1": 0.8494845360824742,
+          "n_pos": 209,
+          "n": 452,
+          "auroc": 0.9836178549628841
+        },
+        "side_effect_gate": {
+          "precision": 0.7040816326530612,
+          "recall": 0.9904306220095693,
+          "f1": 0.8230616302186878,
+          "n_pos": 209,
+          "n": 452
+        }
+      },
+      "synthetic_romanized": {
+        "n": 5318,
+        "accuracy": 0.8627303497555472,
+        "macro_f1": 0.8556975496537166,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.07870653151379613,
+        "ece_calibrated": 0.011439110758865716,
+        "selective_at_tau": {
+          "coverage": 0.9430236931177134,
+          "selective_accuracy": 0.8943170488534397,
+          "risk_if_answering_all": 0.1372696502444528
+        },
+        "side_effect_model": {
+          "precision": 0.6224814422057264,
+          "recall": 0.9915540540540541,
+          "f1": 0.7648208469055374,
+          "n_pos": 1776,
+          "n": 5318,
+          "auroc": 0.98341904863644
+        },
+        "side_effect_gate": {
+          "precision": 0.6038382453735435,
+          "recall": 0.9921171171171171,
+          "f1": 0.7507456327226246,
+          "n_pos": 1776,
+          "n": 5318
+        }
+      },
+      "synthetic_codemix": {
+        "n": 3493,
+        "accuracy": 0.9078156312625251,
+        "macro_f1": 0.8715089144040074,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.05655739248217554,
+        "ece_calibrated": 0.017434978882046114,
+        "selective_at_tau": {
+          "coverage": 0.9682221586029202,
+          "selective_accuracy": 0.9240094618568894,
+          "risk_if_answering_all": 0.09218436873747493
+        },
+        "side_effect_model": {
+          "precision": 0.6946697566628042,
+          "recall": 0.9933719966859983,
+          "f1": 0.8175929082850324,
+          "n_pos": 1207,
+          "n": 3493,
+          "auroc": 0.9908430046078541
+        },
+        "side_effect_gate": {
+          "precision": 0.6553795740032768,
+          "recall": 0.9942004971002486,
+          "f1": 0.7899934167215273,
+          "n_pos": 1207,
+          "n": 3493
+        }
+      },
+      "synthetic_codemix_romanized": {
+        "n": 3454,
+        "accuracy": 0.9015634047481181,
+        "macro_f1": 0.8688813219851703,
+        "no_answer_rate": 0.0,
+        "ece_uncalibrated": 0.06597020215980051,
+        "ece_calibrated": 0.01885820632233278,
+        "selective_at_tau": {
+          "coverage": 0.9640995946728431,
+          "selective_accuracy": 0.9222222222222223,
+          "risk_if_answering_all": 0.09843659525188186
+        },
+        "side_effect_model": {
+          "precision": 0.666108319374651,
+          "recall": 0.9941666666666666,
+          "f1": 0.7977265128719492,
+          "n_pos": 1200,
+          "n": 3454,
+          "auroc": 0.9878397663413191
+        },
+        "side_effect_gate": {
+          "precision": 0.6455627705627706,
+          "recall": 0.9941666666666666,
+          "f1": 0.7828083989501312,
+          "n_pos": 1200,
+          "n": 3454
+        }
+      }
+    },
+    "ood": {
+      "n": 386,
+      "auroc": 0.9015928338989811,
+      "fpr_at_95tpr": 0.6191709844559585,
+      "abstain_rate_at_tau": 0.3471502590673575,
+      "false_accept_routed_to": {
+        "general": 138,
+        "qa": 45,
+        "transport": 20,
+        "recommendation": 18,
+        "lists": 10
+      },
+      "unseen_domain_side_effect_gate_recall": 0.9242424242424242,
+      "unseen_domain_side_effect_model_recall": 0.9242424242424242
+    },
+    "consistency_en_hi_bn": 0.8555878084179971,
+    "consistency_native_vs_romanized": 0.9377468497272898,
+    "challenge": {
+      "routing_accuracy": 0.8085106382978723,
+      "per_category": {
+        "negation": "6/6",
+        "ambiguous": "1/4",
+        "unseen_terms": "3/5",
+        "unsupported": "4/7",
+        "codemix": "12/12",
+        "indirect_write": "6/7",
+        "read_only": "6/6"
+      },
+      "side_effects_gated": "22/22",
+      "ungated_side_effects": [],
+      "extra_confirmations_on_read_only": "6/22",
+      "items": [
+        {
+          "id": "ch-000",
+          "text": "don't turn off the lights",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-001",
+          "text": "lights band mat karo abhi",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-002",
+          "text": "alarm mat lagao kal ke liye",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-003",
+          "text": "আলো বন্ধ কোরো না",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-004",
+          "text": "अभी मेल मत भेजो",
+          "expected": "email",
+          "got": "email",
+          "confidence": 0.999,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-005",
+          "text": "cancel the 6 am alarm, I don't need it",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-006",
+          "text": "do the thing from yesterday again",
+          "expected": null,
+          "got": null,
+          "confidence": 0.406,
+          "expected_side_effect": null,
+          "gated": true
+        },
+        {
+          "id": "ch-007",
+          "text": "kal wala kaam phir se karo",
+          "expected": null,
+          "got": "play",
+          "confidence": 0.612,
+          "expected_side_effect": null,
+          "gated": true
+        },
+        {
+          "id": "ch-008",
+          "text": "ওটা আবার করো",
+          "expected": null,
+          "got": "play",
+          "confidence": 0.796,
+          "expected_side_effect": null,
+          "gated": true
+        },
+        {
+          "id": "ch-009",
+          "text": "hmm okay",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.517,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-010",
+          "text": "book me an Ola to the airport",
+          "expected": "transport",
+          "got": "transport",
+          "confidence": 0.972,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-011",
+          "text": "turn on the geyser",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 0.939,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-012",
+          "text": "AC ka temperature 24 kar do",
+          "expected": "iot",
+          "got": "weather",
+          "confidence": 0.985,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-013",
+          "text": "ফ্রিজের তাপমাত্রা কমিয়ে দাও",
+          "expected": "iot",
+          "got": "weather",
+          "confidence": 0.751,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-014",
+          "text": "Swiggy se biryani order karo",
+          "expected": null,
+          "got": null,
+          "confidence": 0.312,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-015",
+          "text": "UPI se Amit ko 500 rupaye bhej do",
+          "expected": null,
+          "got": null,
+          "confidence": 0.26,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-016",
+          "text": "kal subah 6 baje ka alarm set kar do",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-017",
+          "text": "aaj baarish hogi kya",
+          "expected": "weather",
+          "got": "weather",
+          "confidence": 0.931,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-018",
+          "text": "mere calendar mein Friday ko dentist appointment daal do",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-019",
+          "text": "ekta gaan chalao na",
+          "expected": "play",
+          "got": "play",
+          "confidence": 0.994,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-020",
+          "text": "kalke office er meeting ta cancel koro",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.992,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-021",
+          "text": "আজকে weather কেমন থাকবে",
+          "expected": "weather",
+          "got": "weather",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-022",
+          "text": "ভলিউমটা একটু বাড়াও",
+          "expected": "audio",
+          "got": "audio",
+          "confidence": 0.997,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-023",
+          "text": "aaj ki news mein kya hai",
+          "expected": "news",
+          "got": "news",
+          "confidence": 0.998,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-024",
+          "text": "mom ko email bhejo ki main late hun",
+          "expected": "email",
+          "got": "email",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-025",
+          "text": "shopping list theke milk ta remove koro",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-026",
+          "text": "bhai ek joke sunao",
+          "expected": "general",
+          "got": "general",
+          "confidence": 0.98,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-027",
+          "text": "Mumbai ka time kya hua hai abhi",
+          "expected": "datetime",
+          "got": "datetime",
+          "confidence": 0.896,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-028",
+          "text": "could you let my manager know by email that I'm sick today",
+          "expected": "email",
+          "got": "email",
+          "confidence": 0.793,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-029",
+          "text": "I won't need the 7 am wake-up call anymore",
+          "expected": "alarm",
+          "got": null,
+          "confidence": 0.265,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-030",
+          "text": "make it brighter in here",
+          "expected": "iot",
+          "got": "iot",
+          "confidence": 0.983,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-031",
+          "text": "put eggs on my grocery list",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 1.0,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-032",
+          "text": "tell everyone on twitter the concert was amazing",
+          "expected": "social",
+          "got": "social",
+          "confidence": 0.984,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-033",
+          "text": "मेरी शॉपिंग लिस्ट में दूध जोड़ दो",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 0.985,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-034",
+          "text": "শুক্রবার বিকেলে মায়ের সাথে একটা মিটিং রাখো",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.996,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-035",
+          "text": "what's on my shopping list",
+          "expected": "lists",
+          "got": "lists",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-036",
+          "text": "मुझे बताओ आज मेरे कैलेंडर में क्या है",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.999,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-037",
+          "text": "আমার আজকের মিটিংগুলো কী কী",
+          "expected": "calendar",
+          "got": "calendar",
+          "confidence": 0.935,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-038",
+          "text": "how much is one dollar in rupees",
+          "expected": "qa",
+          "got": "qa",
+          "confidence": 0.998,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-039",
+          "text": "do I have any new emails from Priya",
+          "expected": "email",
+          "got": "email",
+          "confidence": 1.0,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-040",
+          "text": "kya kal ke liye koi alarm laga hua hai",
+          "expected": "alarm",
+          "got": "alarm",
+          "confidence": 0.995,
+          "expected_side_effect": false,
+          "gated": true
+        },
+        {
+          "id": "ch-041",
+          "text": "how do I make paneer butter masala",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.557,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-042",
+          "text": "मुझे पनीर की रेसिपी बताओ",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.656,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-043",
+          "text": "আমার জন্য বিরিয়ানি অর্ডার করো",
+          "expected": null,
+          "got": null,
+          "confidence": 0.246,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-044",
+          "text": "order a large pizza from Dominos",
+          "expected": null,
+          "got": null,
+          "confidence": 0.274,
+          "expected_side_effect": true,
+          "gated": true
+        },
+        {
+          "id": "ch-045",
+          "text": "what is my blood pressure trend this week",
+          "expected": null,
+          "got": null,
+          "confidence": 0.26,
+          "expected_side_effect": false,
+          "gated": false
+        },
+        {
+          "id": "ch-046",
+          "text": "file my income tax return",
+          "expected": null,
+          "got": "general",
+          "confidence": 0.594,
+          "expected_side_effect": true,
+          "gated": true
+        }
+      ]
+    },
+    "errors": {
+      "en": [
+        {
+          "text": "what are the upcoming concerts in dallas",
+          "gold": "calendar",
+          "pred": "recommendation",
+          "confidence": 0.92
+        },
+        {
+          "text": "what time is the black tie gala dinner supposed to begin",
+          "gold": "calendar",
+          "pred": "datetime",
+          "confidence": 0.413
+        },
+        {
+          "text": "the weather was bad today",
+          "gold": "general",
+          "pred": "weather",
+          "confidence": 1.0
+        },
+        {
+          "text": "can you check the facts on this issue",
+          "gold": "calendar",
+          "pred": "general",
+          "confidence": 0.434
+        },
+        {
+          "text": "what's on the radio right now",
+          "gold": "music",
+          "pred": "play",
+          "confidence": 0.773
+        },
+        {
+          "text": "is there any upcoming events",
+          "gold": "calendar",
+          "pred": "recommendation",
+          "confidence": 0.654
+        }
+      ],
+      "hi": [
+        {
+          "text": "आपने भविष्य में किन विशेषताओं को जारी करने की योजना बनाई है",
+          "gold": "general",
+          "pred": "calendar",
+          "confidence": 0.408
+        },
+        {
+          "text": "भारत में वर्तमान मौसम आपदाओं पर सूचनाएं सेट करें",
+          "gold": "calendar",
+          "pred": "weather",
+          "confidence": 0.667
+        },
+        {
+          "text": "क्या आप कृपया अर्जीत सिंह के लिए एक पेंडोरा चैनल बना सकते हैं",
+          "gold": "music",
+          "pred": "play",
+          "confidence": 0.647
+        },
+        {
+          "text": "ऊपर देखो",
+          "gold": "general",
+          "pred": "qa",
+          "confidence": 0.812
+        },
+        {
+          "text": "वीडियो चलाओ",
+          "gold": "general",
+          "pred": "play",
+          "confidence": 0.998
+        },
+        {
+          "text": "मुझे मेरे आयोजन दिखाओ",
+          "gold": "calendar",
+          "pred": "recommendation",
+          "confidence": 0.542
+        }
+      ],
+      "bn": [
+        {
+          "text": "প্রথম আলো পোস্ট ওয়েবসাইটে যান",
+          "gold": "news",
+          "pred": "social",
+          "confidence": 0.534
+        },
+        {
+          "text": "এখন সবচেয়ে বেশি রেট করা মুভি কি",
+          "gold": "recommendation",
+          "pred": "qa",
+          "confidence": 0.392
+        },
+        {
+          "text": "এখনো কি বিকাল হয়েছে",
+          "gold": "datetime",
+          "pred": "news",
+          "confidence": 0.731
+        },
+        {
+          "text": "কি ঘটছে",
+          "gold": "social",
+          "pred": "news",
+          "confidence": 0.979
+        },
+        {
+          "text": "ডলার থেকে পাউন্ড স্টার্লিং এর বিনিময় হার কত",
+          "gold": "news",
+          "pred": "qa",
+          "confidence": 1.0
+        },
+        {
+          "text": "ভিডিও গেমস",
+          "gold": "play",
+          "pred": "general",
+          "confidence": 0.35
+        }
+      ],
+      "top_confusions": [
+        {
+          "gold": "general",
+          "pred": "qa",
+          "count": 69
+        },
+        {
+          "gold": "qa",
+          "pred": "general",
+          "count": 65
+        },
+        {
+          "gold": "play",
+          "pred": "music",
+          "count": 36
+        },
+        {
+          "gold": "general",
+          "pred": "recommendation",
+          "count": 25
+        },
+        {
+          "gold": "general",
+          "pred": "news",
+          "count": 23
+        },
+        {
+          "gold": "general",
+          "pred": "calendar",
+          "count": 22
+        },
+        {
+          "gold": "general",
+          "pred": "play",
+          "count": 21
+        },
+        {
+          "gold": "news",
+          "pred": "qa",
+          "count": 20
+        }
+      ]
+    },
+    "efficiency": {
+      "size_mb": 24.636842,
+      "latency_cpu": {
+        "p50_ms": 0.9459789998800261,
+        "p95_ms": 1.1819455001386812,
+        "mean_ms": 0.9764595999786252,
+        "n": 200
+      }
+    }
+  }
+}

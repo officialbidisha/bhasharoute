@@ -104,6 +104,10 @@ def train(augment: bool) -> None:
 
 
 if __name__ == "__main__":
+    # Re-import so pickled classes/functions resolve to `bhasharoute.models.tfidf`, not
+    # `__main__` - otherwise the saved model only loads inside this script.
+    from bhasharoute.models import tfidf as _module
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--augment", action="store_true")
-    train(ap.parse_args().augment)
+    _module.train(ap.parse_args().augment)
