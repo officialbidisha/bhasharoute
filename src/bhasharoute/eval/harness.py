@@ -293,8 +293,9 @@ def main() -> None:
         if device == "mps":
             torch.mps.empty_cache()
 
-    from bhasharoute.eval.report import write_report
+    from bhasharoute.eval.report import update_readme, write_report
     write_report(results)
+    update_readme(results)
 
 
 if __name__ == "__main__":

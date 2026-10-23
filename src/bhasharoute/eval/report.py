@@ -128,6 +128,55 @@ def write_report(results: dict) -> None:
     print(f"wrote {REPORTS_DIR / 'results.md'}")
 
 
+README_START, README_END = "<!-- RESULTS:START -->", "<!-- RESULTS:END -->"
+
+
+def readme_results(results: dict) -> str:
+    """Compact, auto-generated results block injected into README.md."""
+    models = [m for m in ORDER if m in results]
+    L = ["_Generated from `reports/metrics.json` by `python -m bhasharoute.eval.report`; "
+         "full tables in [`reports/results.md`](reports/results.md)._", "",
+         "**Human-translated test set** (8,157 requests, 16 skills) and **robustness slices** - macro-F1 %:", "",
+         "| model | all | en | hi | bn | human code-mixed | romanized* | romanized code-switched* |",
+         "|---|---|---|---|---|---|---|---|"]
+    for m in models:
+        s = results[m]["sets"]
+        L.append(f"| {DESC[m]} | **{_p(s['native_all']['macro_f1'])}** | {_p(s['native_en']['macro_f1'])} | "
+                 f"{_p(s['native_hi']['macro_f1'])} | {_p(s['native_bn']['macro_f1'])} | {_p(s['human_codemix']['macro_f1'])} | "
+                 f"{_p(s['synthetic_romanized']['macro_f1'])} | {_p(s['synthetic_codemix_romanized']['macro_f1'])} |")
+    L += ["", "\\* synthetic surface forms of held-out test requests (see [datasheet](reports/datasheet.md)).", "",
+          "**Calibration, abstention, safety, cost:**", "",
+          "| model | ECE before -> after | OOD AUROC | OOD abstain @tau | side-effect gate recall | p50 CPU latency |",
+          "|---|---|---|---|---|---|"]
+    for m in models:
+        r = results[m]
+        na, e = r["sets"]["native_all"], r.get("efficiency", {})
+        ece = f"{na['ece_uncalibrated']:.3f} -> {na['ece_calibrated']:.3f}" if r["calibration"] else "–"
+        lat = (e.get("latency_cpu_int8") or e.get("latency_cpu_fp32") or e.get("latency_cpu") or {}).get("p50_ms")
+        tag = " (int8)" if "latency_cpu_int8" in e else ""
+        L.append(f"| {DESC[m]} | {ece} | {_f(r['ood'].get('auroc'), 2)} | {_p(r['ood']['abstain_rate_at_tau'])} | "
+                 f"{_p(na['side_effect_gate']['recall'])} | {'–' if lat is None else f'{lat:.2f} ms{tag}'} |")
+    best = max(models, key=lambda m: results[m]["sets"]["native_all"]["macro_f1"])
+    L += ["", f"Best on the human-translated test set: **{DESC[best]}**.", "",
+          f"<img src=\"reports/figures/reliability_{best}.png\" width=\"360\" alt=\"reliability diagram\"> "
+          f"<img src=\"reports/figures/confusion_{best}.png\" width=\"420\" alt=\"confusion matrix\">"]
+    return "\n".join(L)
+
+
+def update_readme(results: dict) -> None:
+    from bhasharoute.config import ROOT
+    path = ROOT / "README.md"
+    text = path.read_text(encoding="utf-8")
+    if README_START not in text:
+        return
+    head, rest = text.split(README_START, 1)
+    _, tail = rest.split(README_END, 1)
+    path.write_text(f"{head}{README_START}\n{readme_results(results)}\n{README_END}{tail}", encoding="utf-8")
+    print(f"updated {path}")
+
+
 if __name__ == "__main__":
     import json
-    write_report(json.loads((REPORTS_DIR / "metrics.json").read_text()))
+    _results = json.loads((REPORTS_DIR / "metrics.json").read_text())
+    write_report(_results)
+    update_readme(_results)
