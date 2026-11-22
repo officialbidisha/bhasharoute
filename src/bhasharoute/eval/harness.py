@@ -179,22 +179,32 @@ def measure_efficiency(name: str, model, texts: list[str], nat_rows: list[dict])
     if name.startswith("B_"):
         size = (ARTIFACTS_DIR / name / "model.joblib").stat().st_size / 1e6
         return {"size_mb": size, "latency_cpu": lat.per_request_latency(lambda t: model.predict([t]), texts)}
-    from bhasharoute.models.transformer_infer import TransformerClassifier
-    cpu = TransformerClassifier(ARTIFACTS_DIR / name, "cpu")
+    # Move the already-evaluated model to CPU and quantise it in place. Loading a second fp32
+    # copy (and quantising into a third) beside the MPS copy got the harness killed on an
+    # 8 GB machine. The model is not used again after this function.
+    cpu = model
+    cpu.model.to("cpu")
+    cpu.device = torch.device("cpu")
+    gc.collect()
+    if torch.backends.mps.is_available():
+        torch.mps.empty_cache()
     res = {"params_total_m": round(sum(p.numel() for p in cpu.model.parameters()) / 1e6, 1),
            "size_fp32_mb": round(lat.state_dict_mb(cpu.model), 1),
            "latency_cpu_fp32": lat.per_request_latency(lambda t: cpu.logits([t], 1), texts)}
-    q = lat.dynamic_int8(cpu.model)
+    q = lat.dynamic_int8(cpu.model, inplace=True)
     if q is not None:
         cpu.model = q.eval()
+        res["int8_layers"] = "encoder nn.Linear except FFN output projections (see latency.int8_layer_names)"
         res["size_int8_mb"] = round(lat.state_dict_mb(q), 1)
         res["latency_cpu_int8"] = lat.per_request_latency(lambda t: cpu.logits([t], 1), texts)
-        logits, _ = cpu.logits(_texts(nat_rows), 64)
+        # Batch 1, as served and as timed above: dynamic quantisation picks one activation
+        # scale per batch, so padded batches of 64 would score a different model.
+        logits, _ = cpu.logits(_texts(nat_rows), 1)
         y = _y(nat_rows)
         from sklearn.metrics import f1_score
         res["int8_native_all"] = {"accuracy": float((logits.argmax(1) == y).mean()),
-                                  "macro_f1": float(f1_score(y, logits.argmax(1), average="macro"))}
-    del cpu
+                                  "macro_f1": float(f1_score(y, logits.argmax(1), average="macro")),
+                                  "batch_size": 1}
     gc.collect()
     return res
 

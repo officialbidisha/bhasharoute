@@ -120,7 +120,11 @@ implementation, so runs are close but not bit-identical on MPS.
 - Cross-lingual consistency: share of source requests whose English/Hindi/Bengali (or
   native/romanised) forms get the same prediction - a property per-language accuracy hides.
 - Latency: CPU, batch 1, 4 threads, p50/p95 over 200 sampled test requests after warm-up;
-  fp32 vs dynamic int8 quantisation (all `nn.Linear` layers), with the int8 accuracy cost.
+  fp32 vs dynamic int8 quantisation of the encoder's attention and FFN up-projection layers,
+  with the int8 accuracy cost measured at batch 1. The 12 FFN down-projections and the heads
+  stay fp32: their 3072-d GELU inputs have outlier channels that a per-tensor int8 activation
+  scale cannot represent (quantising only those 12 layers cost 6 accuracy points on a
+  500-request probe; the other 60 encoder projections together cost < 0.5).
 
 ## 5. Safety design
 
