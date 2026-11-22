@@ -79,6 +79,9 @@ _Generated from `reports/metrics.json` by `python -m bhasharoute.eval.report`; f
 | A. keyword rules | **62.0** | 64.2 | 60.0 | 60.7 | 58.1 | 36.7 | 49.4 |
 | B. TF-IDF + LR | **87.7** | 88.5 | 87.7 | 86.7 | 90.2 | 18.2 | 50.4 |
 | B. TF-IDF + LR (+code-mix aug) | **87.8** | 88.9 | 87.8 | 86.5 | 90.4 | 85.6 | 86.9 |
+| C. XLM-R frozen + MLP head | **83.0** | 86.4 | 83.0 | 79.3 | 77.2 | 10.8 | 31.3 |
+| C. XLM-R fine-tuned | **90.3** | 91.5 | 90.6 | 88.9 | 89.8 | 28.7 | 53.0 |
+| C. XLM-R fine-tuned (+code-mix aug) | **90.3** | 91.8 | 90.2 | 88.7 | 90.4 | 83.8 | 87.2 |
 
 \* synthetic surface forms of held-out test requests (see [datasheet](reports/datasheet.md)).
 
@@ -87,12 +90,15 @@ _Generated from `reports/metrics.json` by `python -m bhasharoute.eval.report`; f
 | model | ECE before -> after | OOD AUROC | OOD abstain @tau | side-effect gate recall | p50 CPU latency |
 |---|---|---|---|---|---|
 | A. keyword rules | – | – | 90.7 | 52.9 | 0.07 ms |
-| B. TF-IDF + LR | 0.068 -> 0.011 | 0.90 | 34.2 | 99.6 | 0.69 ms |
-| B. TF-IDF + LR (+code-mix aug) | 0.062 -> 0.012 | 0.90 | 34.7 | 99.5 | 0.95 ms |
+| B. TF-IDF + LR | 0.068 -> 0.011 | 0.90 | 34.2 | 99.6 | 0.58 ms |
+| B. TF-IDF + LR (+code-mix aug) | 0.062 -> 0.012 | 0.90 | 34.7 | 99.5 | 0.59 ms |
+| C. XLM-R frozen + MLP head | 0.012 -> 0.013 | 0.86 | 30.3 | 99.3 | 26.20 ms (int8) |
+| C. XLM-R fine-tuned | 0.051 -> 0.011 | 0.91 | 33.7 | 99.3 | 24.82 ms (int8) |
+| C. XLM-R fine-tuned (+code-mix aug) | 0.051 -> 0.013 | 0.91 | 36.0 | 99.3 | 21.39 ms (int8) |
 
-Best on the human-translated test set: **B. TF-IDF + LR (+code-mix aug)**.
+Best on the human-translated test set: **C. XLM-R fine-tuned**.
 
-<img src="reports/figures/reliability_B_tfidf_aug.png" width="360" alt="reliability diagram"> <img src="reports/figures/confusion_B_tfidf_aug.png" width="420" alt="confusion matrix">
+<img src="reports/figures/reliability_C_xlmr_finetune.png" width="360" alt="reliability diagram"> <img src="reports/figures/confusion_C_xlmr_finetune.png" width="420" alt="confusion matrix">
 <!-- RESULTS:END -->
 
 **What the numbers say so far**

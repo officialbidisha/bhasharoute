@@ -11,6 +11,9 @@ All thresholds and temperatures are fit on dev; test is scored once.
 | A. keyword rules | 54.3 | 62.0 | 64.2 | 60.0 | 60.7 | – | – | 52.9 |
 | B. TF-IDF + LR | 88.3 | 87.7 | 88.5 | 87.7 | 86.7 | 0.011 | 0.898 | 99.6 |
 | B. TF-IDF + LR (+code-mix aug) | 88.4 | 87.8 | 88.9 | 87.8 | 86.5 | 0.012 | 0.902 | 99.5 |
+| C. XLM-R frozen + MLP head | 84.4 | 83.0 | 86.4 | 83.0 | 79.3 | 0.013 | 0.861 | 99.3 |
+| C. XLM-R fine-tuned | 90.9 | 90.3 | 91.5 | 90.6 | 88.9 | 0.011 | 0.913 | 99.3 |
+| C. XLM-R fine-tuned (+code-mix aug) | 90.9 | 90.3 | 91.8 | 90.2 | 88.7 | 0.013 | 0.909 | 99.3 |
 
 ## 2. Robustness - script and code-mixing (macro-F1)
 
@@ -21,6 +24,9 @@ All thresholds and temperatures are fit on dev; test is scored once.
 | A. keyword rules | 62.0 | 58.1 | 36.7 | 63.1 | 49.4 |
 | B. TF-IDF + LR | 87.7 | 90.2 | 18.2 | 86.4 | 50.4 |
 | B. TF-IDF + LR (+code-mix aug) | 87.8 | 90.4 | 85.6 | 87.2 | 86.9 |
+| C. XLM-R frozen + MLP head | 83.0 | 77.2 | 10.8 | 79.6 | 31.3 |
+| C. XLM-R fine-tuned | 90.3 | 89.8 | 28.7 | 90.1 | 53.0 |
+| C. XLM-R fine-tuned (+code-mix aug) | 90.3 | 90.4 | 83.8 | 91.0 | 87.2 |
 
 ## 3. Calibration and abstention
 
@@ -31,6 +37,9 @@ tau = confidence threshold keeping 95% of dev requests. OOD = test requests from
 | A. keyword rules | – | – | 64.0 | – | 90.7 (no keyword match) | – |
 | B. TF-IDF + LR | 0.70 | 0.068 -> 0.011 | 95.6 | 90.9 | 34.2 | 63.0 |
 | B. TF-IDF + LR (+code-mix aug) | 0.73 | 0.062 -> 0.012 | 95.6 | 90.9 | 34.7 | 61.9 |
+| C. XLM-R frozen + MLP head | 1.11 | 0.012 -> 0.013 | 94.5 | 87.5 | 30.3 | 72.3 |
+| C. XLM-R fine-tuned | 1.60 | 0.051 -> 0.011 | 95.4 | 93.5 | 33.7 | 64.2 |
+| C. XLM-R fine-tuned (+code-mix aug) | 1.64 | 0.051 -> 0.013 | 95.2 | 93.2 | 36.0 | 63.2 |
 
 ## 4. Side-effect detection (needs confirmation?)
 
@@ -41,6 +50,9 @@ Model = side-effect head at the dev threshold for >=99% recall. Gate = lexical g
 | A. keyword rules | 52.9 | 74.5 | 52.9 | 74.5 | 66.7 |
 | B. TF-IDF + LR | 99.6 | 63.8 | 99.6 | 60.4 | 93.9 |
 | B. TF-IDF + LR (+code-mix aug) | 99.4 | 66.9 | 99.5 | 62.9 | 92.4 |
+| C. XLM-R frozen + MLP head | 99.2 | 58.8 | 99.3 | 56.0 | 98.5 |
+| C. XLM-R fine-tuned | 99.1 | 81.8 | 99.3 | 73.0 | 97.0 |
+| C. XLM-R fine-tuned (+code-mix aug) | 99.1 | 78.2 | 99.3 | 70.5 | 97.0 |
 
 ## 5. Cross-lingual consistency
 
@@ -51,6 +63,9 @@ Share of source requests whose surface forms all receive the same prediction.
 | A. keyword rules | 60.7 | 64.9 |
 | B. TF-IDF + LR | 85.7 | 21.8 |
 | B. TF-IDF + LR (+code-mix aug) | 85.6 | 93.8 |
+| C. XLM-R frozen + MLP head | 76.2 | 18.1 |
+| C. XLM-R fine-tuned | 90.3 | 31.6 |
+| C. XLM-R fine-tuned (+code-mix aug) | 90.2 | 86.9 |
 
 ## 6. Challenge set (47 hand-written edge cases, AI-drafted, review pending)
 
@@ -59,55 +74,61 @@ Share of source requests whose surface forms all receive the same prediction.
 | A. keyword rules | 76.6 | 12/22 | 6/22 | negation 6/6, ambiguous 4/4, unseen_terms 1/5, unsupported 6/7, codemix 9/12, indirect_write 5/7, read_only 5/6 |
 | B. TF-IDF + LR | 74.5 | 22/22 | 11/22 | negation 6/6, ambiguous 1/4, unseen_terms 3/5, unsupported 4/7, codemix 9/12, indirect_write 6/7, read_only 6/6 |
 | B. TF-IDF + LR (+code-mix aug) | 80.9 | 22/22 | 6/22 | negation 6/6, ambiguous 1/4, unseen_terms 3/5, unsupported 4/7, codemix 12/12, indirect_write 6/7, read_only 6/6 |
+| C. XLM-R frozen + MLP head | 63.8 | 22/22 | 10/22 | negation 4/6, ambiguous 1/4, unseen_terms 4/5, unsupported 1/7, codemix 8/12, indirect_write 7/7, read_only 5/6 |
+| C. XLM-R fine-tuned | 78.7 | 22/22 | 9/22 | negation 6/6, ambiguous 1/4, unseen_terms 4/5, unsupported 3/7, codemix 10/12, indirect_write 7/7, read_only 6/6 |
+| C. XLM-R fine-tuned (+code-mix aug) | 83.0 | 22/22 | 9/22 | negation 6/6, ambiguous 0/4, unseen_terms 5/5, unsupported 4/7, codemix 11/12, indirect_write 7/7, read_only 6/6 |
 
 ## 7. Efficiency (CPU, batch size 1, 4 threads, Apple M3)
 
 | model | size | p50 latency | p95 latency | int8 size | int8 p50 / p95 | int8 accuracy / macro-F1 |
 |---|---|---|---|---|---|---|
 | A. keyword rules | <1 MB | 0.07 ms | 0.15 ms | – | – | – |
-| B. TF-IDF + LR | 17 MB | 0.69 ms | 1.03 ms | – | – | – |
-| B. TF-IDF + LR (+code-mix aug) | 25 MB | 0.95 ms | 1.18 ms | – | – | – |
+| B. TF-IDF + LR | 17 MB | 0.58 ms | 0.63 ms | – | – | – |
+| B. TF-IDF + LR (+code-mix aug) | 25 MB | 0.59 ms | 0.66 ms | – | – | – |
+| C. XLM-R frozen + MLP head | 1113 MB | 29.1 ms | 34.1 ms | 942 MB | 26.2 / 61.2 ms | 82.0 / 80.6 |
+| C. XLM-R fine-tuned | 1112 MB | 39.1 ms | 52.6 ms | 941 MB | 24.8 / 37.1 ms | 90.5 / 89.9 |
+| C. XLM-R fine-tuned (+code-mix aug) | 1112 MB | 43.0 ms | 54.9 ms | 941 MB | 21.4 / 30.4 ms | 90.4 / 89.8 |
 
-## 8. Error analysis - B. TF-IDF + LR (+code-mix aug)
+## 8. Error analysis - C. XLM-R fine-tuned
 
 Most frequent confusions (gold -> predicted):
 
-- general -> qa: 69
-- qa -> general: 65
-- play -> music: 36
-- general -> recommendation: 25
-- general -> news: 23
-- general -> calendar: 22
-- general -> play: 21
-- news -> qa: 20
+- general -> qa: 61
+- qa -> general: 49
+- general -> news: 31
+- general -> calendar: 27
+- news -> qa: 21
+- lists -> calendar: 20
+- play -> music: 18
+- music -> play: 18
 
 Sampled errors (en):
 
-- `what are the upcoming concerts in dallas` gold **calendar**, predicted **recommendation** (p=0.92)
-- `what time is the black tie gala dinner supposed to begin` gold **calendar**, predicted **datetime** (p=0.413)
-- `the weather was bad today` gold **general**, predicted **weather** (p=1.0)
-- `can you check the facts on this issue` gold **calendar**, predicted **general** (p=0.434)
-- `what's on the radio right now` gold **music**, predicted **play** (p=0.773)
-- `is there any upcoming events` gold **calendar**, predicted **recommendation** (p=0.654)
+- `baseball scores` gold **general**, predicted **news** (p=0.686)
+- `go on sweet talk me` gold **general**, predicted **play** (p=0.729)
+- `consequences to actions` gold **qa**, predicted **general** (p=0.424)
+- `what going on` gold **social**, predicted **news** (p=0.278)
+- `how we can get credit` gold **email**, predicted **general** (p=0.74)
+- `what time should i go for a hike` gold **weather**, predicted **transport** (p=0.491)
 
 Sampled errors (hi):
 
-- `आपने भविष्य में किन विशेषताओं को जारी करने की योजना बनाई है` gold **general**, predicted **calendar** (p=0.408)
-- `भारत में वर्तमान मौसम आपदाओं पर सूचनाएं सेट करें` gold **calendar**, predicted **weather** (p=0.667)
-- `क्या आप कृपया अर्जीत सिंह के लिए एक पेंडोरा चैनल बना सकते हैं` gold **music**, predicted **play** (p=0.647)
-- `ऊपर देखो` gold **general**, predicted **qa** (p=0.812)
-- `वीडियो चलाओ` gold **general**, predicted **play** (p=0.998)
-- `मुझे मेरे आयोजन दिखाओ` gold **calendar**, predicted **recommendation** (p=0.542)
+- `प्रियंका चोपड़ा इतनी जवान कैसे दखती है` gold **general**, predicted **qa** (p=0.917)
+- `चुना हुआ गाना जोड़ें` gold **play**, predicted **music** (p=0.847)
+- `मैं चाहता हूं कि यह मेरी प्राथमिकताओं को याद रखे और मेरे पूछने पर मुझे उनके आधार पर चीजों की सिफारिश करे` gold **general**, predicted **calendar** (p=0.815)
+- `मुझे कुछ अच्छी आवाज दो` gold **play**, predicted **audio** (p=0.776)
+- `मुझे जल्द से जल्द एक व्यक्ति प्राप्त करें` gold **social**, predicted **email** (p=0.621)
+- `शहर सस्ता है या रहने के लिए महंगा` gold **weather**, predicted **general** (p=0.811)
 
 Sampled errors (bn):
 
-- `প্রথম আলো পোস্ট ওয়েবসাইটে যান` gold **news**, predicted **social** (p=0.534)
-- `এখন সবচেয়ে বেশি রেট করা মুভি কি` gold **recommendation**, predicted **qa** (p=0.392)
-- `এখনো কি বিকাল হয়েছে` gold **datetime**, predicted **news** (p=0.731)
-- `কি ঘটছে` gold **social**, predicted **news** (p=0.979)
-- `ডলার থেকে পাউন্ড স্টার্লিং এর বিনিময় হার কত` gold **news**, predicted **qa** (p=1.0)
-- `ভিডিও গেমস` gold **play**, predicted **general** (p=0.35)
+- `অনলাইন তথ্য অনুসন্ধান` gold **general**, predicted **email** (p=0.446)
+- `গরম বিষয়` gold **news**, predicted **weather** (p=0.793)
+- `সেরা র‍্যাপ গান` gold **play**, predicted **music** (p=0.714)
+- `এটি গুরুত্বপূর্ণ হিসাবে চিহ্নিত করুন যদি এটি একটি খুব পরিচিত জায়গা থেকে হয়` gold **email**, predicted **calendar** (p=0.294)
+- `আমাকে to do list দিন` gold **calendar**, predicted **lists** (p=0.994)
+- `অলি লিস্ট সাফ করুন` gold **lists**, predicted **play** (p=0.77)
 
-OOD requests answered anyway were routed to: {'general': 138, 'qa': 45, 'transport': 20, 'recommendation': 18, 'lists': 10}
+OOD requests answered anyway were routed to: {'general': 159, 'iot': 28, 'lists': 23, 'qa': 13, 'recommendation': 11}
 
-Challenge side-effect requests NOT gated by B. TF-IDF + LR (+code-mix aug): none
+Challenge side-effect requests NOT gated by C. XLM-R fine-tuned: none
