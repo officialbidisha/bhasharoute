@@ -39,8 +39,9 @@ def int8_layer_names(module: torch.nn.Module) -> list[str]:
     Dynamic quantisation uses one activation scale per tensor. The input to each FFN
     down-projection is the 3072-d GELU output, whose few large outlier channels leave too
     little int8 resolution for everything else. On 500 test requests (frozen encoder, batch 1)
-    quantising only those 12 layers cost 6 accuracy points, while the other 60 encoder
-    projections together cost <0.5. They stay fp32, as do the small classification heads."""
+    quantising only those 12 layers cost 6 accuracy points, while each other group (q/k/v,
+    attention output, FFN up-projection) cost at most 0.4 alone; all 60 together cost 2.6
+    (0.4 on the fine-tuned model). They stay fp32, as do the small classification heads."""
     return [n for n, m in module.named_modules()
             if isinstance(m, torch.nn.Linear) and n.startswith("encoder.") and not is_ffn_output(n)]
 

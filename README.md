@@ -101,20 +101,33 @@ Best on the human-translated test set: **C. XLM-R fine-tuned**.
 <img src="reports/figures/reliability_C_xlmr_finetune.png" width="360" alt="reliability diagram"> <img src="reports/figures/confusion_C_xlmr_finetune.png" width="420" alt="confusion matrix">
 <!-- RESULTS:END -->
 
-**What the numbers say so far**
+**What the numbers say**
 
 - **Native-script training is not enough.** TF-IDF trained only on native-script text collapses on romanized
   Hindi/Bengali (18.2% macro-F1) and agrees with itself across scripts only 21.8% of the time. Adding synthetic romanized
   and code-switched variants of the *training* requests restores it to 85.6% and 93.8% agreement, with no loss on
   native-script test data.
-- **Raw confidences are miscalibrated; one scalar fixes most of it.** Temperature scaling fit on dev cuts ECE by ~5x
-  without changing a single prediction.
+- **Fine-tuning XLM-R gives the best routing, and the frozen encoder is not enough.** Fine-tuned XLM-R reaches 90.3%
+  macro-F1 against 87.8% for TF-IDF, and the same prediction for 90.3% of source requests in all three languages
+  (en=hi=bn) against 85.6%. The frozen encoder plus MLP head scores 83.0%, below TF-IDF, so pretrained features alone
+  do not win.
+- **Multilingual pretraining does not buy romanised robustness.** Native-only fine-tuned XLM-R scores 28.7% on
+  romanised text and agrees between native and romanised forms only 31.6% of the time. The same code-mix augmentation
+  lifts it to 83.8% and 86.9% agreement, so the augmentation matters more than the model choice.
+- **Raw confidences are miscalibrated; one scalar fixes most of it.** Temperature scaling fit on dev cuts ECE
+  by ~5x for TF-IDF (0.068 -> 0.011) and fine-tuned XLM-R (0.051 -> 0.011) without changing a single prediction. The
+  frozen encoder was already calibrated (0.012 -> 0.013, T = 1.11).
 - **Held-out domains are hard to refuse.** Food requests overlap lexically with in-domain skills (qa, lists,
   recommendations, transport booking), so a max-softmax threshold that answers 95% of in-domain requests still lets
   many food requests through. The safety gate does not depend on routing being right: it still flags most unseen-domain
   orders.
-- **Recall-first safety costs precision.** The gate catches >99% of state-changing requests; the price is extra
-  confirmations on some read-only requests (see `reports/results.md` §4).
+- **Recall-first safety costs precision, and the model choice shifts the trade-off.** Every model's gate catches >99%
+  of state-changing requests. Fine-tuned XLM-R raises gate precision from 62.9% (TF-IDF+aug) to 73.0%, so fewer
+  read-only requests need confirmation, and it catches 97% of unseen-domain side effects (TF-IDF+aug 92.4%). Max-softmax
+  OOD detection stays weak for every model (AUROC 0.90-0.91); see `reports/results.md` §4.
+- **TF-IDF is ~40x faster and ~40x smaller.** TF-IDF+aug takes 0.59 ms p50 and 25 MB, against 24.8 ms and 941 MB for
+  int8 XLM-R. When latency or memory dominates, TF-IDF+aug is a strong choice: it is within ~2.5 macro-F1 points of the
+  best model and as robust on romanised text.
 
 ## Data and provenance
 
@@ -176,6 +189,16 @@ Things that went wrong or were non-obvious, and what was done about them:
 - **MPS memory growth.** Fully dynamic padding produced many sequence shapes; the MPS kernel-graph cache grew past 5 GB
   and training thrashed swap. Padding to multiples of 16, micro-batch 16 with 2-step gradient accumulation, and releasing
   cached blocks per epoch hold GPU memory at ~3.3 GB.
+- **Evaluating fine-tuned XLM-R ran out of memory.** Timing the fine-tuned model loaded a second fp32
+  copy on CPU next to the MPS copy, and quantisation made a third, which was too much for 8 GB. The harness now moves
+  the evaluated model to CPU and quantises it in place.
+- **Dynamic int8 broke on the FFN down-projections.** On a 500-request probe with the frozen encoder, quantising every
+  `nn.Linear` cut accuracy from 83.4% to 70.6% (60.6% when scored in padded batches of 64). Quantising only the 12 FFN
+  down-projections (`encoder.layer.N.output.dense`) cost 6 points; each other group (attention q/k/v, attention output,
+  FFN up-projection) cost at most 0.4 on its own. With those 12 layers (and the heads) kept in fp32, int8 costs 2.6
+  points on the frozen encoder and 0.4 on the fine-tuned model (89.9 vs 90.3 macro-F1 on the full test set, at 24.8 vs
+  39.1 ms p50). int8 accuracy is now scored at batch 1, matching serving, because dynamic quantisation picks one
+  activation scale per batch and padding changes it.
 - **Pickles that only load in one script.** Training with `python -m` pickled the TF-IDF model as `__main__.TfidfClassifier`;
   the entry point now delegates to the importable module.
 - **transformers v5 dropped `config._commit_hash`**, so the base-model revision is resolved from the hub cache instead.
@@ -204,6 +227,9 @@ tests/               unit, integration, artifact-gated regression tests
 - Single seed per configuration; next: multiple seeds with bootstrap confidence intervals.
 - Max-softmax is a weak OOD score; next: energy-based or Mahalanobis scores, and a MuRIL ablation.
 - For on-device deployment, distil the fine-tuned model into a small student and measure on-device latency and energy.
+- The int8 model is still 941 MB (fp32: 1112 MB) because the 192M-parameter token-embedding matrix stays fp32. Next:
+  prune the vocabulary to en/hi/bn tokens or quantise the embeddings, alongside distillation.
+- Latencies were measured on a laptop in normal use, so p95 values are noisy; p50 is the figure to compare.
 
 ## License and attribution
 

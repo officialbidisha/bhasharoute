@@ -123,8 +123,10 @@ implementation, so runs are close but not bit-identical on MPS.
   fp32 vs dynamic int8 quantisation of the encoder's attention and FFN up-projection layers,
   with the int8 accuracy cost measured at batch 1. The 12 FFN down-projections and the heads
   stay fp32: their 3072-d GELU inputs have outlier channels that a per-tensor int8 activation
-  scale cannot represent (quantising only those 12 layers cost 6 accuracy points on a
-  500-request probe; the other 60 encoder projections together cost < 0.5).
+  scale cannot represent. On a 500-request probe (frozen encoder, batch 1), quantising only
+  those 12 layers cost 6 accuracy points, while each other group (q/k/v, attention output,
+  FFN up-projection) cost at most 0.4 alone. All 60 quantised layers together cost 2.6 points
+  on the frozen encoder and 0.4 on the fine-tuned model.
 
 ## 5. Safety design
 
